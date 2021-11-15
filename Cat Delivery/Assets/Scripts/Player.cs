@@ -53,9 +53,10 @@ public class Player : MonoBehaviour{
     }
 
     private void DeliverItem(Costumer costumer){
-        Item item = costumer.GetDesiredItem();
-        if(playerBag.RemoveItem(item.name)){
+        Good good = (Good) costumer.GetDesiredItem();
+        if(playerBag.RemoveItem(good.name)){
             costumer.OnItemDeliver();
+            money += good.price * 2;
             Debug.Log("Item entregue");
             return;
         };

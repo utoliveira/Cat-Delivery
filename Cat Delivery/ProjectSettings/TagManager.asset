@@ -47,3 +47,6 @@ TagManager:
   - name: Player
     uniqueID: 2787627295
     locked: 0
+  - name: HUD
+    uniqueID: 824492337
+    locked: 0

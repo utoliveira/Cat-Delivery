@@ -16,15 +16,26 @@ public class Character2DMovement : MonoBehaviour
     public void Move(float horizontalMove, bool jump) {
         Vector2 targetVelocity = new Vector2(horizontalMove * 10f, rigidBody2D.velocity.y);
         rigidBody2D.velocity = Vector2.Lerp(rigidBody2D.velocity, targetVelocity, speed * Time.deltaTime );
-
         
         if(jump && isPlayerGrounded())
             rigidBody2D.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
 
+        if(isfacingRight && horizontalMove < 0){
+            Flip();
+        }else if(!isfacingRight &&  horizontalMove > 0){
+            Flip();
+        }
     }
 
     private bool isPlayerGrounded(){
         return Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, groundLayer).Length > 0;
+    }
+
+    private void Flip(){
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
+        isfacingRight = !isfacingRight;
     }
 
     private void OnDrawGizmos() {
