@@ -4,8 +4,36 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    List<Costumer> allCostumers;
-    List<Costumer> freeCostumers;
+    public static LevelManager instance;
+    [SerializeField] private int whiskas = 5;
+    private void Awake() {
+        if(instance){
+            Destroy(this.gameObject);
+            return;
+        }
+        instance = this;
+    }
+
+    private void Start() {
+        HUDManager.instance.UpdateWhiskas(whiskas);
+    }
+    public void AddWhiskas(int whiskas){
+        this.whiskas += Mathf.Abs(whiskas);
+        HUDManager.instance.UpdateWhiskas(this.whiskas);
+    }
+
+    public void RemoveWhiskas(int whiskas){
+        if(whiskas <= this.whiskas){
+            this.whiskas -= whiskas;
+            HUDManager.instance.UpdateWhiskas(this.whiskas);
+        } 
+    }
+
+    public int GetWhiskas(){
+        return whiskas;
+    }
+
+
 
     //Spawn new building
 

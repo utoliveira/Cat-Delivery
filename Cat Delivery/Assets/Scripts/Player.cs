@@ -8,11 +8,10 @@ public class Player : MonoBehaviour{
     [SerializeField] private ItemStorage playerBag;
     [SerializeField] private float interactionRange = 0.5f;
     [SerializeField] private LayerMask interactableLayer;
-    private int money = 200;
-
+    
     private bool jump;
     private float horizontalMove;
-    private void Update() {
+    private void LateUpdate() {
         CheckInteraction();
         CheckMovement();
     }
@@ -42,9 +41,9 @@ public class Player : MonoBehaviour{
     }
 
     private void BuyItem(Vendor vendor){
-        if(!playerBag.IsFull() && vendor.GetGood().price <= money){
+        if(!playerBag.IsFull() && vendor.GetGood().price <= LevelManager.instance.GetWhiskas()){
             Good good = vendor.GetGood();
-            money -= good.price;
+            LevelManager.instance.RemoveWhiskas(good.price);
             playerBag.AddItem(good);
             vendor.OnSellingGood();
         }else{
@@ -54,9 +53,10 @@ public class Player : MonoBehaviour{
 
     private void DeliverItem(Costumer costumer){
         Good good = (Good) costumer.GetDesiredItem();
+        
         if(playerBag.RemoveItem(good.name)){
             costumer.OnItemDeliver();
-            money += good.price * 2;
+            LevelManager.instance.AddWhiskas(good.price * 2);
             Debug.Log("Item entregue");
             return;
         };
