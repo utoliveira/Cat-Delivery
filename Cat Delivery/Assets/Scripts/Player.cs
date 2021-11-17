@@ -68,7 +68,7 @@ public class Player : MonoBehaviour{
     private void CheckMovement() {
         horizontalMove = Input.GetAxisRaw(PlayerConstants.HORIZONTAL_AXIS);
         //TODO: Change to Horizontal UP
-        if(Input.GetButtonDown(PlayerConstants.JUMP_AXIS)) 
+        if(Input.GetButtonDown(PlayerConstants.UP_AXIS)) 
             jump = true;
     }
 

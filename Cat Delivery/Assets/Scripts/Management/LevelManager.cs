@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    public static LevelManager instance;
+    public static LevelManager instance; 
+
+    private int profitRate = 2;
+    [SerializeField] private GameConfig gameConfig;
     [SerializeField] private int whiskas = 5;
     private void Awake() {
         if(instance){
@@ -17,8 +20,9 @@ public class LevelManager : MonoBehaviour
     private void Start() {
         HUDManager.instance.UpdateWhiskas(whiskas);
     }
-    public void AddWhiskas(int whiskas){
-        this.whiskas += Mathf.Abs(whiskas);
+    public void AddWhiskas(int whiskas, bool applyProfit = false){
+        int amount = applyProfit ? whiskas * profitRate : whiskas;
+        this.whiskas += Mathf.Abs(amount);
         HUDManager.instance.UpdateWhiskas(this.whiskas);
     }
 
@@ -31,6 +35,14 @@ public class LevelManager : MonoBehaviour
 
     public int GetWhiskas(){
         return whiskas;
+    }
+
+    public GameConfig GetGameConfig(){
+        return gameConfig;
+    }
+
+    public int GetProfitRate(){
+        return profitRate;
     }
 
 

@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adb990f4699a1584a8526cd4fa7586e6, type: 3}
+  m_Script: {fileID: 11500000, guid: fa85247749651694589265b6d3b4e9a2, type: 3}
   m_Name: Flower
   m_EditorClassIdentifier: 
-  code: flower_1
+  code: flower
   name: Flower
   artwork: {fileID: 21300000, guid: 6a2b8f77e801fd743a3538d950b4e0c5, type: 3}
   weight: 0
+  price: 1

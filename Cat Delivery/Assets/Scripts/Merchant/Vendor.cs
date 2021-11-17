@@ -10,9 +10,13 @@ public class Vendor : MonoBehaviour
     [SerializeField] protected Good good;
 
     private void Start() {
+        ConfigureGood(good);
+    } 
+
+    private void ConfigureGood(Good good){
         spriteRenderer.sprite = good.artwork;
         priceDisplay.text = good.price.ToString(); 
-    } 
+    }
 
     public Good GetGood() {
         return good;
@@ -20,6 +24,11 @@ public class Vendor : MonoBehaviour
 
     public void OnSellingGood(){
         Debug.Log("TUTCHIM!");
+    }
+
+    public void setGood(Good good){
+        this.good = good;
+        ConfigureGood(good);
     }
 
 }

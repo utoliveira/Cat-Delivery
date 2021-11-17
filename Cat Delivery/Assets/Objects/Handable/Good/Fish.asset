@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa85247749651694589265b6d3b4e9a2, type: 3}
   m_Name: Fish
   m_EditorClassIdentifier: 
+  code: regular_fish
   name: Fish
   artwork: {fileID: 21300000, guid: 0328389852c0ded47bfaac6e152a0fe4, type: 3}
   weight: 2

@@ -480,7 +480,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 3789380578306287055}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 7c3f9052a21650945b9ab06699a732cb, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -590,9 +590,10 @@ GameObject:
   - component: {fileID: 3789380578693243150}
   - component: {fileID: 3789380578693243144}
   - component: {fileID: 3789380578693243151}
+  - component: {fileID: 383232287027560532}
   m_Layer: 0
   m_Name: Merchant
-  m_TagString: Untagged
+  m_TagString: Merchant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -649,6 +650,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody2D: {fileID: 3789380578693243144}
   speed: 20
+  vendors:
+  - {fileID: 1471589875}
+--- !u!61 &383232287027560532
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3789380578693243149}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.33716965, y: 0.7781868}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 7.3952904, y: 3.4532666}
+  m_EdgeRadius: 0
 --- !u!1 &3789380579110232115
 GameObject:
   m_ObjectHideFlags: 0
