@@ -17,4 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 937789445035635439462210a350f32c, type: 2}
   - {fileID: 11400000, guid: 3208a01eb5080534392936b71a33aba4, type: 2}
   - {fileID: 11400000, guid: 3fd61825a8e63a04295681466e3ead4f, type: 2}
-  availableMerchants: []
+  availableMerchants:
+  - {fileID: 3789380578693243149, guid: 1cbd199ebb8c2734aa8ebde90163bb6e, type: 3}
+  availableCostumers:
+  - {fileID: 99070508230749234, guid: 4024960b634952a428fa7a6af1351c1d, type: 3}

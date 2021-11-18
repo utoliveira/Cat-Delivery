@@ -25,7 +25,7 @@ public class Merchant : MonoBehaviour
 
         vendors.ForEach( vendor => {
             //What if the amount of goods are lower than the vendors?
-            Good good = availableGoods[Random.Range(0, availableGoods.Count)];
+            Good good = Helper.GetRandomized<Good>(availableGoods);
             availableGoods.Remove(good);
             vendor.setGood(good);
         });

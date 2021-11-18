@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private int whiskas = 5;
     private void Awake() {
         if(instance){
-            Destroy(this.gameObject);
+            Destroy(this);
             return;
         }
         instance = this;

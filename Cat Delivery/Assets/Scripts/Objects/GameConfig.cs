@@ -9,6 +9,9 @@ public class GameConfig : ScriptableObject
     public List<Good> availableGoods;
     public List<GameObject> availableMerchants;
 
+    public List<GameObject> availableCostumers;
+
+
     //Available buildings
 
     //Merchant Spawn config

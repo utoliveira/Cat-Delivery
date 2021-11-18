@@ -10,6 +10,7 @@ public class Player : MonoBehaviour{
     [SerializeField] private LayerMask interactableLayer;
     
     private bool jump;
+    private bool moveDown;
     private float horizontalMove;
     private void LateUpdate() {
         CheckInteraction();
@@ -70,11 +71,15 @@ public class Player : MonoBehaviour{
         //TODO: Change to Horizontal UP
         if(Input.GetButtonDown(PlayerConstants.UP_AXIS)) 
             jump = true;
+        
+        if(Input.GetButtonDown(PlayerConstants.DOWN_AXIS))
+            moveDown = true;
     }
 
     private void ApplyMovement() {
-        movementController.Move(horizontalMove, jump);
+        movementController.Move(horizontalMove, jump, moveDown);
         jump = false;
+        moveDown = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

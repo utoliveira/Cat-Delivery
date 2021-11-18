@@ -8,16 +8,23 @@ public class Costumer : MonoBehaviour {
     [SerializeField] private Text itemDisplay;
      
      private void Start() {
-         LoadDesiredItem();
+         if(desiredItem){
+            LoadDesiredItem();
+         }
      }
 
-     public void ChangeItem(Item item){
+     public void SetDesiredItem(Item item){
+         Debug.Log("Chamou");
          desiredItem = item;
          LoadDesiredItem();
      }
 
     public Item GetDesiredItem(){
         return desiredItem;
+    }
+
+    public bool HasDesiredItem(){
+        return GetDesiredItem() != null;
     }
 
      public void OnItemDeliver(){

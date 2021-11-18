@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d9e14ecfca53744a48d1cd4b60978d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredItem: {fileID: 11400000, guid: 937789445035635439462210a350f32c, type: 2}
+  desiredItem: {fileID: 0}
   itemDisplay: {fileID: 7407903028240213}
 --- !u!61 &3169886269854891
 BoxCollider2D:
@@ -152,7 +152,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 
 --- !u!1 &2126473442463606569
 GameObject:
   m_ObjectHideFlags: 0
