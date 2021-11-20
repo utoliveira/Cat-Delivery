@@ -18,6 +18,7 @@ public class LevelManager : MonoBehaviour
     }
 
     private void Start() {
+        Time.timeScale = 1;
         HUDManager.instance.UpdateWhiskas(whiskas);
     }
     public void AddWhiskas(int whiskas, bool applyProfit = false){
@@ -31,6 +32,11 @@ public class LevelManager : MonoBehaviour
             this.whiskas -= whiskas;
             HUDManager.instance.UpdateWhiskas(this.whiskas);
         } 
+    }
+
+    public void GameOver(){
+        Time.timeScale = 0;
+        HUDManager.instance.GameOver();
     }
 
     public int GetWhiskas(){

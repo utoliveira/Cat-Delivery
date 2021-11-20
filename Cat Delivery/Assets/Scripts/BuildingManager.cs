@@ -5,7 +5,6 @@ using UnityEngine;
 public class BuildingManager : MonoBehaviour
 {
     [SerializeField] private List<Building> buildings;
-    private bool hasEvolutionAvailable = false;
 
     private void Awake() {
         buildings = Helper.GetAllComponentsByTag<Building>(Tags.BUILDING);

@@ -12,7 +12,7 @@ public class Player : MonoBehaviour{
     private bool jump;
     private bool moveDown;
     private float horizontalMove;
-    private void LateUpdate() {
+    private void Update() {
         CheckInteraction();
         CheckMovement();
     }
@@ -85,6 +85,7 @@ public class Player : MonoBehaviour{
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag(Tags.WATER)){
             Destroy(this.gameObject);
+            LevelManager.instance.GameOver();
         }
     }
     

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +5,7 @@ public class HUDManager : MonoBehaviour
 {
     public static HUDManager instance;
     [SerializeField] private Text WhiskasDisplay;
+    [SerializeField] private GameObject GameOverMenu;
 
     private void Awake() {
         if(instance){
@@ -21,4 +20,7 @@ public class HUDManager : MonoBehaviour
         WhiskasDisplay.text = whiskas.ToString();
     }
 
+    public void GameOver(){
+        GameOverMenu.SetActive(true);
+    }
 }
