@@ -9,6 +9,7 @@ TagManager:
   - Costumer
   - Merchant
   - Building
+  - Transporter
   layers:
   - Default
   - TransparentFX

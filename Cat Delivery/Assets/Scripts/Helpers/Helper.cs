@@ -9,7 +9,14 @@ public class Helper
     }
 
     public static T GetRandomized<T>(List<T> list){
-        if(list == null) return default(T);
+        if(list == null || list.Count == 0) 
+            return default(T);
+        
         return list[Random.Range(0, list.Count)];
     }
+
+    public static T GetRandomized<T>(HashSet<T> set){
+        return GetRandomized<T>(new List<T>(set));
+    }
+    
 }

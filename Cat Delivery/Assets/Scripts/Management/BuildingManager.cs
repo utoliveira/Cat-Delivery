@@ -5,27 +5,34 @@ using UnityEngine;
 public class BuildingManager : MonoBehaviour
 {
     [SerializeField] private List<Building> buildings;
+    public static BuildingManager instance;
+    private Coroutine currentManagement;
+    private float timeToEvolveBuildings = 15f;
 
     private void Awake() {
+        if(instance){
+            Destroy(this);
+            return;
+        }
+        instance = this;
         buildings = Helper.GetAllComponentsByTag<Building>(Tags.BUILDING);
     }
 
-    private void Start() {
-        StartCoroutine(EvolveBuildings());
+    public void StartManagement() {
+        currentManagement = StartCoroutine(EvolveBuildings());
     }
 
     private IEnumerator EvolveBuildings(){
         while(true){
-            yield return new WaitForSeconds(15f);
+            yield return new WaitForSeconds(timeToEvolveBuildings);
             Building evolvableBuilding = buildings.Find(building => building.hasNextLevel());
             EvolveBuilding(evolvableBuilding);
-
         }
-        
     }
 
     private void EvolveBuilding(Building building){
-        if(!building || !building.hasNextLevel()) return;
+        if(!building || !building.hasNextLevel()) 
+            return;
 
         GameObject nextLevelPrefab = building.getNextLevelPrefab(); 
         

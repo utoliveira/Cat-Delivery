@@ -8,6 +8,7 @@ public class CostumerManager : MonoBehaviour
 
     [SerializeField] private List<Costumer> costumers = new List<Costumer>();
 
+    private Coroutine currentManagement; //Replace for abstract
     private void Awake() {
         if(!instance){
             instance = this;
@@ -17,24 +18,33 @@ public class CostumerManager : MonoBehaviour
         Destroy(this);
     }
 
-    private void Start() {
-        StartCoroutine(ConfigureCostumersDesires());
+    public void StartManagement() {
+        if(currentManagement != null)
+            StopCoroutine(currentManagement);
+
+        currentManagement = StartCoroutine(ConfigureCostumersDesires());
     }
 
     private IEnumerator ConfigureCostumersDesires(){
+        DifficultyConfig difficulty = LevelManager.instance.GetDifficulty();
+       
         while(true){
-            yield return new WaitForSeconds(5f);
-            //Configure if there's none
+            yield return new WaitForSeconds(difficulty.timeToConfigureCostumer);
             
-            Costumer availableCostumer = costumers.Find(costumer => !costumer.HasDesiredItem());
-            if(!availableCostumer) continue;
+            Costumer costumer = Helper.GetRandomized<Costumer>(GetAvailableCostumers());
             
-            Good good = Helper.GetRandomized<Good>(LevelManager.instance.GetGameConfig().availableGoods);
+            if(!costumer) continue;
             
-            availableCostumer.SetDesiredItem(good);
-            //Get which merchant has goods in time to player get it
-            //How many players can have desired Item?
+            Good good = Helper.GetRandomized<Good>(MerchantManager.instance.GetAvailableGood());
+
+            if(good){
+                costumer.SetDesiredItem(good);
+            }
         }
+    }
+
+    public List<Costumer> GetAvailableCostumers () {
+        return costumers.FindAll(costumer => !costumer.HasDesiredItem());
     }
 
     public void ConfigureNewCostumers(Transform spawnPosition) {

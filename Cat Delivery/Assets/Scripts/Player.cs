@@ -42,7 +42,7 @@ public class Player : MonoBehaviour{
     }
 
     private void BuyItem(Vendor vendor){
-        if(!playerBag.IsFull() && vendor.GetGood().price <= LevelManager.instance.GetWhiskas()){
+        if(vendor.GetGood().price <= LevelManager.instance.GetWhiskas()){
             Good good = vendor.GetGood();
             LevelManager.instance.RemoveWhiskas(good.price);
             playerBag.AddItem(good);
@@ -53,11 +53,16 @@ public class Player : MonoBehaviour{
     }
 
     private void DeliverItem(Costumer costumer){
-        Good good = (Good) costumer.GetDesiredItem();
+
+        if(playerBag.isEmpty()) return;
         
-        if(playerBag.RemoveItem(good.name)){
-            costumer.OnItemDeliver();
-            LevelManager.instance.AddWhiskas(good.price * 2);
+        Good costumerGood = (Good) costumer.GetDesiredItem();
+
+        if(!costumerGood) return;
+        
+        if(playerBag.RemoveItem(costumerGood.name)){
+            costumer.RemoveDesiredItem();
+            LevelManager.instance.AddWhiskas(costumerGood.price * 2);
             Debug.Log("Item entregue");
             return;
         };
@@ -68,7 +73,7 @@ public class Player : MonoBehaviour{
 
     private void CheckMovement() {
         horizontalMove = Input.GetAxisRaw(PlayerConstants.HORIZONTAL_AXIS);
-        //TODO: Change to Horizontal UP
+
         if(Input.GetButtonDown(PlayerConstants.UP_AXIS)) 
             jump = true;
         

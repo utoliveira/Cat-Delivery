@@ -5,9 +5,8 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance; 
-
-    private int profitRate = 2;
-    [SerializeField] private GameConfig gameConfig;
+    [SerializeField] private GameConfig gameConfig; //Change to LevelConfig
+    [SerializeField] private DifficultyConfig currentDifficulty;
     [SerializeField] private int whiskas = 5;
     private void Awake() {
         if(instance){
@@ -20,11 +19,27 @@ public class LevelManager : MonoBehaviour
     private void Start() {
         Time.timeScale = 1;
         HUDManager.instance.UpdateWhiskas(whiskas);
+
+        CostumerManager.instance.StartManagement(); //Change to stopAll with a Manager generic class Specific Manager
+        MerchantManager.instance.StartManagement();
+        BuildingManager.instance.StartManagement();
+    }
+
+    private void GoNextLevel(){
+        if(currentDifficulty.nextDifficulty != null)
+            this.currentDifficulty = currentDifficulty.nextDifficulty;
+        
+        CostumerManager.instance.StartManagement(); //Change to stopAll with a Manager generic class Specific Manager
+        MerchantManager.instance.StartManagement();
+        BuildingManager.instance.StartManagement();
     }
     public void AddWhiskas(int whiskas, bool applyProfit = false){
-        int amount = applyProfit ? whiskas * profitRate : whiskas;
+        int amount = applyProfit ? whiskas * currentDifficulty.profitRate : whiskas;
         this.whiskas += Mathf.Abs(amount);
         HUDManager.instance.UpdateWhiskas(this.whiskas);
+
+        if(this.whiskas > currentDifficulty.whiskasToEvolve)
+            GoNextLevel();
     }
 
     public void RemoveWhiskas(int whiskas){
@@ -46,17 +61,8 @@ public class LevelManager : MonoBehaviour
     public GameConfig GetGameConfig(){
         return gameConfig;
     }
-
-    public int GetProfitRate(){
-        return profitRate;
+    public DifficultyConfig GetDifficulty(){
+        return currentDifficulty;
     }
 
-
-
-    //Spawn new building
-
-    // New Desired item
-    //  Spawn new building or get an boat that is existed -> 
-
-    //Event -> OnFinishedDeliver => add free costumer to a list 
 }

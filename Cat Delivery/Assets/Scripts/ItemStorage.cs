@@ -5,20 +5,14 @@ using UnityEngine;
 public class ItemStorage : MonoBehaviour
 {
     
-    [SerializeField] private List<Item> items;
-    [SerializeField] private Transform bagPosition; 
-    
-    private int itemsCapacity = 1;
+    [SerializeField] private List<Item> items = new List<Item>();
 
-    public bool IsFull(){
-        return items.Count >= itemsCapacity;
+    public bool isEmpty(){
+        return items.Count < 1;
     }
 
-    public bool AddItem(Item item){
-        if(IsFull()) return false;
-
+    public void AddItem(Item item){
         items.Add(item);
-        return true;
     }
 
     public Item RemoveItem(string itemName){

@@ -9,6 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86b3ccd84480e3e41ac811270987cfde, type: 3}
-  m_Name: BuildingConfig
+  m_Script: {fileID: 11500000, guid: 2457758ae928450488c04dc2cbaa02b5, type: 3}
+  m_Name: Medium
   m_EditorClassIdentifier: 
+  nextDifficulty: {fileID: 11400000, guid: 4eb08ecceef4f464c8b994f149550522, type: 2}
+  whiskasToEvolve: 50
+  maxMerchant: 3
+  timeToSpawnMerchant: 3
+  timeToConfigureCostumer: 2
+  profitRate: 3
