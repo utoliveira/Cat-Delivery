@@ -4,5 +4,8 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName ="new Good", menuName= "Handables/Goods")]
 public class Good : Item{
-   public int price;
+   public int basePrice;
+
+   [Range(1, 8)]
+   public int speed;
 }

@@ -23,7 +23,7 @@ public class MerchantManager : MonoBehaviour
 
         while(true){
             if(currentMerchants.Count < difficulty.maxMerchant){
-                spawner.SpawnMerchant(LevelManager.instance.GetGameConfig().availableGoods);
+                spawner.SpawnMerchant();
             }
             yield return new WaitForSeconds(difficulty.timeToSpawnMerchant);
         }
@@ -49,8 +49,8 @@ public class MerchantManager : MonoBehaviour
     public HashSet<Good> GetAvailableGood() {
         HashSet<Good> availableGoods = new HashSet<Good>(); 
         currentMerchants
-            .FindAll(merchant =>  merchant.GetTraveledDistanceInPercent() < 0.5f)
-            .ForEach(merchant => availableGoods.UnionWith(merchant.getGoods()));
+            .FindAll(merchant =>  merchant.GetTraveledDistanceInPercent() < 0.6f)
+            .ForEach(merchant => availableGoods.UnionWith(merchant.GetGoods()));
 
         return availableGoods;
     }

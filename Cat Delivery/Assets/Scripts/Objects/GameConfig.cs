@@ -14,5 +14,6 @@ public class GameConfig : ScriptableObject {
     [Header("Costumers")]
     public List<GameObject> availableCostumers;
 
+    public int initialWhiskas = 200;
 
 }

@@ -6,8 +6,8 @@ public class BuildingManager : MonoBehaviour
 {
     [SerializeField] private List<Building> buildings;
     public static BuildingManager instance;
-    private Coroutine currentManagement;
-    private float timeToEvolveBuildings = 15f;
+
+    private bool allBuildingsEvolved;
 
     private void Awake() {
         if(instance){
@@ -18,16 +18,18 @@ public class BuildingManager : MonoBehaviour
         buildings = Helper.GetAllComponentsByTag<Building>(Tags.BUILDING);
     }
 
-    public void StartManagement() {
-        currentManagement = StartCoroutine(EvolveBuildings());
-    }
 
-    private IEnumerator EvolveBuildings(){
-        while(true){
-            yield return new WaitForSeconds(timeToEvolveBuildings);
-            Building evolvableBuilding = buildings.Find(building => building.hasNextLevel());
-            EvolveBuilding(evolvableBuilding);
+    public void EvolveAnyBuilding(){
+        if(allBuildingsEvolved) return;
+
+        Building evolvableBuilding = buildings.Find(building => building.hasNextLevel());
+        
+        if(evolvableBuilding == null) {
+            allBuildingsEvolved = true;
+            return;
         }
+        
+        EvolveBuilding(evolvableBuilding);
     }
 
     private void EvolveBuilding(Building building){
@@ -60,8 +62,6 @@ public class BuildingManager : MonoBehaviour
         buildings.Remove(building);
         Destroy(building.gameObject);
     }
-
-
 
 
     //Building configs: => This one has the information of the available buildings 

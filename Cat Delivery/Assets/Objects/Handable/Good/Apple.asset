@@ -16,4 +16,5 @@ MonoBehaviour:
   name: Apple
   artwork: {fileID: 21300000, guid: 6ebfc97c4319c954c85451186e025f62, type: 3}
   weight: 0
-  price: 2
+  basePrice: 5
+  speed: 1

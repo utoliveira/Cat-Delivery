@@ -15,7 +15,7 @@ public class Vendor : MonoBehaviour
 
     private void ConfigureGood(Good good){
         spriteRenderer.sprite = good.artwork;
-        priceDisplay.text = good.price.ToString(); 
+        priceDisplay.text = good.basePrice.ToString(); 
     }
 
     public Good GetGood() {
@@ -26,7 +26,7 @@ public class Vendor : MonoBehaviour
         Debug.Log("TUTCHIM!");
     }
 
-    public void setGood(Good good){
+    public void SetGood(Good good){
         this.good = good;
         ConfigureGood(good);
     }

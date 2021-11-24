@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Medium
   m_EditorClassIdentifier: 
   nextDifficulty: {fileID: 11400000, guid: 4eb08ecceef4f464c8b994f149550522, type: 2}
-  whiskasToEvolve: 50
+  whiskasToNextLevel: 100
   maxMerchant: 3
-  timeToSpawnMerchant: 3
+  timeToSpawnMerchant: 4
   timeToConfigureCostumer: 2
   profitRate: 3
+  velocityFactor: 2
+  whiskasToEvolveBuildings: 100

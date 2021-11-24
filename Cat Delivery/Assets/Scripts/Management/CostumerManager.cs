@@ -37,9 +37,8 @@ public class CostumerManager : MonoBehaviour
             
             Good good = Helper.GetRandomized<Good>(MerchantManager.instance.GetAvailableGood());
 
-            if(good){
-                costumer.SetDesiredItem(good);
-            }
+            if(good != null) costumer.SetDesiredItem(good);
+            
         }
     }
 

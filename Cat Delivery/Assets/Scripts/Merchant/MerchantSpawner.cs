@@ -9,7 +9,7 @@ public class MerchantSpawner : MonoBehaviour
     public GameObject merchantPrefab; //TODO: Change to variable merchants and boats
     private int lastSpawnIndex = 0;
 
-    public Merchant SpawnMerchant(List<Good> availableGoods){
+    public Merchant SpawnMerchant(){
         TrajectoryInitialPoint spawnerPoint =  getNextSpawnerPoint();
         
         Merchant merchant = Instantiate(
@@ -17,13 +17,12 @@ public class MerchantSpawner : MonoBehaviour
             spawnerPoint.transform.position,
             merchantPrefab.transform.rotation
         ).GetComponent<Merchant>();
-                
-        int speed = Random.Range(1, 3);
-        merchant.ConfigureTrajectory(spawnerPoint, speed); 
-        merchant.ConfigureVendors(availableGoods);
+                        
+        merchant.Configure(spawnerPoint, LevelManager.instance.GetGameConfig().availableGoods);
         MerchantManager.instance.RegisterMerchant(merchant);
         return merchant;
     }
+
 
 
     private TrajectoryInitialPoint getNextSpawnerPoint(){

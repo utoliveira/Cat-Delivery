@@ -42,9 +42,9 @@ public class Player : MonoBehaviour{
     }
 
     private void BuyItem(Vendor vendor){
-        if(vendor.GetGood().price <= LevelManager.instance.GetWhiskas()){
+        if(vendor.GetGood().basePrice <= LevelManager.instance.GetWhiskas()){
             Good good = vendor.GetGood();
-            LevelManager.instance.RemoveWhiskas(good.price);
+            LevelManager.instance.RemoveWhiskas(good.basePrice);
             playerBag.AddItem(good);
             vendor.OnSellingGood();
         }else{
@@ -62,7 +62,7 @@ public class Player : MonoBehaviour{
         
         if(playerBag.RemoveItem(costumerGood.name)){
             costumer.RemoveDesiredItem();
-            LevelManager.instance.AddWhiskas(costumerGood.price * 2);
+            LevelManager.instance.AddWhiskas(costumerGood.basePrice * 2);
             Debug.Log("Item entregue");
             return;
         };

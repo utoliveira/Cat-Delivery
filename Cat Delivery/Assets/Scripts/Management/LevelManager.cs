@@ -18,11 +18,11 @@ public class LevelManager : MonoBehaviour
 
     private void Start() {
         Time.timeScale = 1;
+        whiskas = gameConfig.initialWhiskas;
         HUDManager.instance.UpdateWhiskas(whiskas);
 
         CostumerManager.instance.StartManagement(); //Change to stopAll with a Manager generic class Specific Manager
         MerchantManager.instance.StartManagement();
-        BuildingManager.instance.StartManagement();
     }
 
     private void GoNextLevel(){
@@ -31,15 +31,26 @@ public class LevelManager : MonoBehaviour
         
         CostumerManager.instance.StartManagement(); //Change to stopAll with a Manager generic class Specific Manager
         MerchantManager.instance.StartManagement();
-        BuildingManager.instance.StartManagement();
     }
     public void AddWhiskas(int whiskas, bool applyProfit = false){
         int amount = applyProfit ? whiskas * currentDifficulty.profitRate : whiskas;
         this.whiskas += Mathf.Abs(amount);
         HUDManager.instance.UpdateWhiskas(this.whiskas);
 
-        if(this.whiskas > currentDifficulty.whiskasToEvolve)
+        if(isAbleToGoNextLevel())
             GoNextLevel();
+
+        if(isAbleToEvolveBuilding())
+            BuildingManager.instance.EvolveAnyBuilding();
+        
+    }
+
+    public bool isAbleToEvolveBuilding() {
+        return this.whiskas % currentDifficulty.whiskasToEvolveBuildings == 0;
+    }
+
+    public bool isAbleToGoNextLevel(){
+        return this.whiskas > currentDifficulty.whiskasToNextLevel;
     }
 
     public void RemoveWhiskas(int whiskas){
