@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Character2DMovement : MonoBehaviour
 {
@@ -11,12 +12,18 @@ public class Character2DMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius = 0.05f;
 
+    public UnityEvent onLandEvent;
+
     private bool isfacingRight = true; 
 
     private bool isGrounded = false;
 
     private void FixedUpdate() {
+        bool wasPlayerGrounded = isGrounded;
         isGrounded = CheckPlayerGrounded();
+
+        if(isGrounded && !wasPlayerGrounded)
+            onLandEvent.Invoke();
     }
 
     private bool CheckPlayerGrounded (){

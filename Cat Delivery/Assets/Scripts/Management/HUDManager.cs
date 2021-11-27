@@ -7,6 +7,9 @@ public class HUDManager : MonoBehaviour
     [SerializeField] private Text WhiskasDisplay;
     [SerializeField] private GameObject GameOverMenu;
 
+    [SerializeField] private ItemsHUD itemsHUD;
+
+
     private void Awake() {
         if(instance){
             Destroy(this.gameObject);
@@ -22,5 +25,12 @@ public class HUDManager : MonoBehaviour
 
     public void GameOver(){
         GameOverMenu.SetActive(true);
+    }
+    
+    public void RemoveItem(Item item){
+        itemsHUD.RemoveItem(item);
+    }
+    public void AddItem(Item item){
+        itemsHUD.AddItem(item);
     }
 }

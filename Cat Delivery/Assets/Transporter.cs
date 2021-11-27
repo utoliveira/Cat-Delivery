@@ -5,7 +5,7 @@ using UnityEngine;
 public class Transporter : MonoBehaviour
 {
     private void OnTriggerStay2D(Collider2D other) { 
-        Debug.Log("Too much hitting");
+        //TODO: 
         //Make only one boat at time, so they can never hit each other and then change this to enter,
         if(!isPlayer(other) || isBeingTransportedByAnyone(other)) return;
         other.transform.parent = this.transform;

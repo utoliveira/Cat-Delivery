@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4892118922724212733}
   - component: {fileID: 2301076026177353485}
+  - component: {fileID: 1929885262025643203}
   m_Layer: 0
-  m_Name: Sprite
+  m_Name: Artwork
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3985273169027549901}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.072, z: 0}
-  m_LocalScale: {x: 0.19542481, y: 0.19542481, z: 0.19542481}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.4}
   m_Children: []
   m_Father: {fileID: 7892364379901638362}
   m_RootOrder: 0
@@ -71,17 +72,36 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5502e15a8d8208e419df057d5bef6dab, type: 3}
+  m_Sprite: {fileID: 857241030028600877, guid: 3591e8ac4515ab84887f070bf31e6c0f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 7.35, y: 7.42}
+  m_Size: {x: 5.1621385, y: 6.18}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1929885262025643203
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3985273169027549901}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9fe5e8aa6ffb0414f867190c9d16fbab, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5300562049874391296
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,9 +173,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.05}
+  m_Offset: {x: 0.016402245, y: -0.18946922}
   serializedVersion: 2
-  m_Radius: 0.45
+  m_Radius: 0.74602866
 --- !u!114 &131135219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +196,21 @@ MonoBehaviour:
     m_Bits: 8
   groundCheck: {fileID: 438151206898898543}
   groundCheckRadius: 0.05
+  onLandEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1100274296}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnLandEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1100274296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,8 +224,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementController: {fileID: 131135219}
+  animator: {fileID: 1929885262025643203}
   playerBag: {fileID: 962753002}
-  interactionRange: 0.7
+  interactionRange: 1.04
   interactableLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -231,7 +267,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7229438592721642537}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.49, z: 0}
+  m_LocalPosition: {x: 0, y: -0.922, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7892364379901638362}

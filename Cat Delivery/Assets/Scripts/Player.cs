@@ -5,9 +5,12 @@ using UnityEngine;
 public class Player : MonoBehaviour{
 
     [SerializeField] private Character2DMovement movementController;
+    
+    [SerializeField] private Animator animator;
     [SerializeField] private ItemStorage playerBag;
     [SerializeField] private float interactionRange = 0.5f;
     [SerializeField] private LayerMask interactableLayer;
+
     
     private bool jump;
     private bool moveDown;
@@ -70,17 +73,18 @@ public class Player : MonoBehaviour{
         Debug.Log("Jogador não tem item");
     }
 
-
     private void CheckMovement() {
         horizontalMove = Input.GetAxisRaw(PlayerConstants.HORIZONTAL_AXIS);
+        animator.SetFloat(PlayerConstants.ANIM_SPEED_PARAM, Mathf.Abs(horizontalMove));
 
-        if(Input.GetButtonDown(PlayerConstants.UP_AXIS)) 
+        if(Input.GetButtonDown(PlayerConstants.UP_AXIS)){
             jump = true;
+            animator.SetBool(PlayerConstants.ANIM_JUMP_PARAM, true);
+        }
         
         if(Input.GetButtonDown(PlayerConstants.DOWN_AXIS))
             moveDown = true;
     }
-
     private void ApplyMovement() {
         movementController.Move(horizontalMove, jump, moveDown);
         jump = false;
@@ -97,5 +101,9 @@ public class Player : MonoBehaviour{
     private void OnDrawGizmos() {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, interactionRange);
+    }
+
+    public void OnLandEvent(){
+        animator.SetBool(PlayerConstants.ANIM_JUMP_PARAM, false);
     }
 }
