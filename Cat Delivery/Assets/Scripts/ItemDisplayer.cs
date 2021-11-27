@@ -3,14 +3,14 @@ using UnityEngine.UI;
 public class ItemDisplayer : MonoBehaviour
 {
     
-    [SerializeField] private Image image;
-    [SerializeField] private Item item;
+    [SerializeField] protected Image image;
+    [SerializeField] protected Item item;
 
     private void Start() {
         UpdateImage();
     }
-
-    public void ChangeItem(Item item){
+  
+    public virtual void ChangeItem(Item item){
         this.item = item; 
         UpdateImage();
     }

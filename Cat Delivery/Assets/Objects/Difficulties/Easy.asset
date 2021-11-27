@@ -19,4 +19,4 @@ MonoBehaviour:
   timeToConfigureCostumer: 4
   profitRate: 2
   velocityFactor: 1
-  whiskasToEvolveBuildings: 50
+  whiskasToEvolveBuildings: 25

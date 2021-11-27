@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameConfig gameConfig; //Change to LevelConfig
     [SerializeField] private DifficultyConfig currentDifficulty;
     [SerializeField] private int whiskas = 5;
+    private int lastBuildingLevel;
     private void Awake() {
         if(instance){
             Destroy(this);
@@ -40,16 +41,22 @@ public class LevelManager : MonoBehaviour
         if(isAbleToGoNextLevel())
             GoNextLevel();
 
-        if(isAbleToEvolveBuilding())
+        if(isAbleToEvolveBuilding()){
             BuildingManager.instance.EvolveAnyBuilding();
+            lastBuildingLevel = GetCurrentBuildingLevel();
+        }
         
     }
 
-    public bool isAbleToEvolveBuilding() {
-        return this.whiskas % currentDifficulty.whiskasToEvolveBuildings == 0;
+    private bool isAbleToEvolveBuilding() {
+        return lastBuildingLevel < GetCurrentBuildingLevel();
     }
 
-    public bool isAbleToGoNextLevel(){
+    private int GetCurrentBuildingLevel(){
+        return (int) (this.whiskas / currentDifficulty.whiskasToEvolveBuildings);
+    }
+
+    private bool isAbleToGoNextLevel(){
         return this.whiskas > currentDifficulty.whiskasToNextLevel;
     }
 

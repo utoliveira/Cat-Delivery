@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Costumer : MonoBehaviour {
     [SerializeField] private Item desiredItem;
-    [SerializeField] private Text itemDisplay;
+    [SerializeField] private ItemDesireDisplayer itemDisplay;
 
     private Coroutine expireCoroutine;
 
@@ -47,11 +47,11 @@ public class Costumer : MonoBehaviour {
 
      public void RemoveDesiredItem(){
          desiredItem = null;
-         itemDisplay.text = null;
+         itemDisplay.CleanDisplay();
      }
 
      private void LoadDesiredItem(){
-        itemDisplay.text = desiredItem.name;
+        itemDisplay.ChangeItem(desiredItem);
         expireCoroutine = StartCoroutine(ExpireDesireItem());
      }
 
