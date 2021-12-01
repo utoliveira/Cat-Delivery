@@ -53,3 +53,12 @@ TagManager:
   - name: HUD
     uniqueID: 824492337
     locked: 0
+  - name: Building
+    uniqueID: 2681544885
+    locked: 0
+  - name: Water
+    uniqueID: 1910626803
+    locked: 0
+  - name: Merchant
+    uniqueID: 1048090581
+    locked: 0

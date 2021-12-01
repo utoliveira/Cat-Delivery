@@ -11,7 +11,6 @@ public class Player : MonoBehaviour{
     [SerializeField] private float interactionRange = 0.5f;
     [SerializeField] private LayerMask interactableLayer;
 
-    
     private bool jump;
     private bool moveDown;
     private float horizontalMove;
