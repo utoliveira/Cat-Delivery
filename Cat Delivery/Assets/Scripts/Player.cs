@@ -63,9 +63,7 @@ public class Player : MonoBehaviour{
         if(!costumerGood) return;
         
         if(playerBag.RemoveItem(costumerGood.name)){
-            costumer.RemoveDesiredItem();
-            LevelManager.instance.AddWhiskas(costumerGood.basePrice * 2);
-            Debug.Log("Item entregue");
+            costumer.OnDesiredItemDeliver();
             return;
         };
 

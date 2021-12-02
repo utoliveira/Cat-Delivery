@@ -6,9 +6,8 @@ public class HUDManager : MonoBehaviour
     public static HUDManager instance;
     [SerializeField] private Text WhiskasDisplay;
     [SerializeField] private GameObject GameOverMenu;
-
     [SerializeField] private ItemsHUD itemsHUD;
-
+    [SerializeField] private CostumerHappinessHUD costumerHappinessHUD;
 
     private void Awake() {
         if(instance){
@@ -32,5 +31,9 @@ public class HUDManager : MonoBehaviour
     }
     public void AddItem(Item item){
         itemsHUD.AddItem(item);
+    }
+
+    public void UpdateCostumerHappinessCounter(int actualAmount){
+        costumerHappinessHUD.UpdateCounter(actualAmount);
     }
 }

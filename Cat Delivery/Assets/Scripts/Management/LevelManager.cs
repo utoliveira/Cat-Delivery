@@ -34,8 +34,11 @@ public class LevelManager : MonoBehaviour
         MerchantManager.instance.StartManagement();
     }
     public void AddWhiskas(int whiskas, bool applyProfit = false){
+        
         int amount = applyProfit ? whiskas * currentDifficulty.profitRate : whiskas;
+        
         this.whiskas += Mathf.Abs(amount);
+        
         HUDManager.instance.UpdateWhiskas(this.whiskas);
 
         if(isAbleToGoNextLevel())

@@ -48,6 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   desiredItem: {fileID: 0}
   itemDisplay: {fileID: 4683900564763849871}
+  happyEffect: {fileID: 5910050781880839304, guid: f243980df8f104343ab07137f7e5207e, type: 3}
+  unhappyEffect: {fileID: 8652987742598405590, guid: c7c4c943170b85143b591034efd4896f, type: 3}
 --- !u!58 &4108465497353671442
 CircleCollider2D:
   m_ObjectHideFlags: 0
