@@ -43,7 +43,7 @@ public class CostumerManager : MonoBehaviour
     }
 
     public List<Costumer> GetAvailableCostumers () {
-        return costumers.FindAll(costumer => !costumer.HasDesiredItem());
+        return costumers.FindAll(costumer => !costumer.HasDesiredItem() && !costumer.IsCoolingDown());
     }
 
     public void ConfigureNewCostumers(Transform spawnPosition) {

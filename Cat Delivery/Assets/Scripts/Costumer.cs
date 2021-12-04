@@ -15,6 +15,8 @@ public class Costumer : MonoBehaviour {
 
     private float timeToExpireItem = 8f;
     private int timeItemSettled; 
+
+    private bool isCoolingDown;
      
      private void Start() {
          if(desiredItem){
@@ -24,6 +26,7 @@ public class Costumer : MonoBehaviour {
      private void Update() {
          StopCoroutine(ExpireDesireItem());
      }
+
 
      public void SetDesiredItem(Item item){
 
@@ -51,6 +54,9 @@ public class Costumer : MonoBehaviour {
     public bool HasDesiredItem(){
         return GetDesiredItem() != null;
     }
+    public bool IsCoolingDown(){
+        return isCoolingDown;
+    }
 
      private void RemoveDesiredItem(){
         desiredItem = null;
@@ -63,6 +69,7 @@ public class Costumer : MonoBehaviour {
         HappinessLevel happinessLevel = GetHappiness();
         LevelManager.instance.AddWhiskas(GetPaymentValue(happinessLevel));
         CostumerManager.instance.RegisterCostumerHappiness(happinessLevel);
+        StartCoroutine(Cooldown());
         RemoveDesiredItem();
         if(happinessLevel >= HappinessLevel.HAPPY)
             Instantiate(happyEffect, this.transform);
@@ -101,5 +108,14 @@ public class Costumer : MonoBehaviour {
         itemDisplay.ChangeItem(desiredItem);
         expireCoroutine = StartCoroutine(ExpireDesireItem());
      }
+
+     
+    private IEnumerator Cooldown(){
+        Debug.Log("Cooling down");
+        isCoolingDown = true;
+        yield return new WaitForSeconds(LevelManager.instance.GetGameConfig().costumerCooldownTime);
+        isCoolingDown = false;
+        Debug.Log("NOT Cooling down");
+    }
 
 }

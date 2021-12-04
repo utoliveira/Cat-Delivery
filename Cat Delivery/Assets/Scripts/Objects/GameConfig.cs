@@ -16,4 +16,6 @@ public class GameConfig : ScriptableObject {
 
     public int initialWhiskas = 200;
 
+    public float costumerCooldownTime = 1f;
+
 }
