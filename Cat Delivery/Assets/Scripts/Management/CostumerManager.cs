@@ -8,7 +8,6 @@ public class CostumerManager : MonoBehaviour
 
     [SerializeField] private List<Costumer> costumers = new List<Costumer>();
     private int costumersHappiness = 0;
-    [SerializeField] private int  maxCostumerHappiness = 3;
 
     private Coroutine currentManagement; //Replace for abstract
 
@@ -91,18 +90,19 @@ public class CostumerManager : MonoBehaviour
                 break;
         }
         
-        HUDManager.instance.UpdateCostumerHappinessCounter(this.costumersHappiness);
+        HUDManager.instance.UpdateCostumerHappinessCounter(costumersHappiness, happinessLevel);
     }
 
     private void DecreaseHappinessLevel(){
         this.costumersHappiness--;
 
-        if(this.costumersHappiness < -2) //Change to getGameDifficulty
+        if(this.costumersHappiness < LevelManager.instance.GetDifficulty().minCostumerHappiness) //Change to getGameDifficulty
             LevelManager.instance.GameOver();
     }
 
     private void IncreaseHappinessLevel(int amountOfHappiness){
         costumersHappiness += Mathf.Abs(amountOfHappiness);
+        int maxCostumerHappiness = LevelManager.instance.GetDifficulty().maxCostumerHappiness;
         
         if(costumersHappiness > maxCostumerHappiness){
             costumersHappiness = maxCostumerHappiness;

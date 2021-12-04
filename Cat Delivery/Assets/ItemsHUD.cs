@@ -9,6 +9,7 @@ public class ItemsHUD : MonoBehaviour
 
     public void AddItem(Item item){
         ItemDisplayer displayer = Instantiate(displayerPrefab, this.transform).GetComponent<ItemDisplayer>();
+        displayer.transform.SetAsFirstSibling();
         displayer.ChangeItem(item);
         itemsOnDisplay.Add(displayer);
     }

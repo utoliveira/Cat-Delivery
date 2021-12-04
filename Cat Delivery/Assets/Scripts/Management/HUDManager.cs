@@ -33,7 +33,7 @@ public class HUDManager : MonoBehaviour
         itemsHUD.AddItem(item);
     }
 
-    public void UpdateCostumerHappinessCounter(int actualAmount){
-        costumerHappinessHUD.UpdateCounter(actualAmount);
+    public void UpdateCostumerHappinessCounter(int actualAmount, HappinessLevel happinessLevel){
+        costumerHappinessHUD.UpdateCounter(actualAmount, happinessLevel);
     }
 }

@@ -32,6 +32,7 @@ public class LevelManager : MonoBehaviour
         
         CostumerManager.instance.StartManagement(); //Change to stopAll with a Manager generic class Specific Manager
         MerchantManager.instance.StartManagement();
+        //Reset the costumer manager level 
     }
     public void AddWhiskas(int whiskas, bool applyProfit = false){
         

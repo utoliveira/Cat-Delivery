@@ -14,6 +14,9 @@ public class DifficultyConfig : ScriptableObject {
     [Header("Costumers")] [Space]
     public float timeToConfigureCostumer;
 
+    public int maxCostumerHappiness = 3;
+    public int minCostumerHappiness = -3;
+
     public int profitRate = 2;
    
     [Range(1, 3)] 
