@@ -7,7 +7,6 @@ using System;
 public class Costumer : MonoBehaviour {
     [SerializeField] private Item desiredItem;
     [SerializeField] private ItemDesireDisplayer itemDisplay;
-
     [SerializeField] private GameObject happyEffect;
     [SerializeField] private GameObject unhappyEffect;
 
@@ -67,16 +66,17 @@ public class Costumer : MonoBehaviour {
 
      public void OnDesiredItemDeliver(){
         HappinessLevel happinessLevel = GetHappiness();
-        LevelManager.instance.AddWhiskas(GetPaymentValue(happinessLevel));
         CostumerManager.instance.RegisterCostumerHappiness(happinessLevel);
+        LevelManager.instance.AddWhiskas(GetPaymentValue(happinessLevel));
+        
         StartCoroutine(Cooldown());
         RemoveDesiredItem();
+
         if(happinessLevel >= HappinessLevel.HAPPY)
             Instantiate(happyEffect, this.transform);
     }
-
     private int GetPaymentValue(HappinessLevel happinessLevel){
-        int goodValue =  ((Good) desiredItem).basePrice;
+        int goodValue =  GetDesiredItemValue();
        
         switch(happinessLevel){
             case HappinessLevel.SUPER_HAPPY:
@@ -90,6 +90,9 @@ public class Costumer : MonoBehaviour {
         }
     }
 
+    private int GetDesiredItemValue(){
+        return ((Good) desiredItem).basePrice;
+    }
     private HappinessLevel GetHappiness(){
         int timeItemDelivered = DateTime.Now.Second;
         float percentOfTime = 1 - (timeItemDelivered - timeItemSettled) / timeToExpireItem;

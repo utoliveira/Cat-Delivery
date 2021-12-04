@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6206151925329312845, guid: 49c516d8caca8aa44ade0056bdadb1e8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.82
+      objectReference: {fileID: 0}
     - target: {fileID: 6206151925329312846, guid: 49c516d8caca8aa44ade0056bdadb1e8, type: 3}
       propertyPath: m_Name
       value: Sad Reaction
