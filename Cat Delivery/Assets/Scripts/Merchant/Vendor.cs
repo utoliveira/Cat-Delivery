@@ -8,6 +8,7 @@ public class Vendor : MonoBehaviour
     [SerializeField] private Text priceDisplay;
     [SerializeField] protected SpriteRenderer spriteRenderer;
     [SerializeField] protected Good good;
+    [SerializeField] private GameObject whiskasEffect;
 
     private void Start() {
         ConfigureGood(good);
@@ -23,7 +24,9 @@ public class Vendor : MonoBehaviour
     }
 
     public void OnSellingGood(){
-        Debug.Log("TUTCHIM!");
+        Instantiate(whiskasEffect, this.transform.position, whiskasEffect.transform.rotation)
+            .GetComponent<WhiskasEffect>()
+            .Configure(-good.basePrice, WhiskasEffectColors.NEGATIVE);
     }
 
     public void SetGood(Good good){

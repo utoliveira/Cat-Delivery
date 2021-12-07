@@ -251,7 +251,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1048090581
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0328389852c0ded47bfaac6e152a0fe4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -305,6 +305,7 @@ MonoBehaviour:
   priceDisplay: {fileID: 337314036}
   spriteRenderer: {fileID: 3789380578228688110}
   good: {fileID: 11400000, guid: 937789445035635439462210a350f32c, type: 2}
+  whiskasEffect: {fileID: 3518455020996927316, guid: 1e5165eb2cabc3a439f919eeb9cc1f49, type: 3}
 --- !u!1 &3789380578306287055
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +378,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1048090581
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: dae49d67c45476b44954658ea0a48aaa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -615,7 +616,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1048090581
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -8941730453798252969, guid: 903943436b7c9b3428251d1b50d136cd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -813,7 +814,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1048090581
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: dae49d67c45476b44954658ea0a48aaa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

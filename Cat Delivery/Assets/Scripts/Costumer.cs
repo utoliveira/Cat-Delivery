@@ -7,8 +7,8 @@ using System;
 public class Costumer : MonoBehaviour {
     [SerializeField] private Item desiredItem;
     [SerializeField] private ItemDesireDisplayer itemDisplay;
-    [SerializeField] private GameObject happyEffect;
     [SerializeField] private GameObject unhappyEffect;
+    [SerializeField] private GameObject whiskasEffect;
 
     private Coroutine expireCoroutine;
 
@@ -61,20 +61,26 @@ public class Costumer : MonoBehaviour {
         desiredItem = null;
         itemDisplay.CleanDisplay();
         StopCoroutine(expireCoroutine);
+        StartCoroutine(Cooldown());
         expireCoroutine = null;
      }
 
      public void OnDesiredItemDeliver(){
         HappinessLevel happinessLevel = GetHappiness();
         CostumerManager.instance.RegisterCostumerHappiness(happinessLevel);
-        LevelManager.instance.AddWhiskas(GetPaymentValue(happinessLevel));
+        int paymentValue = GetPaymentValue(happinessLevel);
+        LevelManager.instance.AddWhiskas(paymentValue);
         
-        StartCoroutine(Cooldown());
-        RemoveDesiredItem();
+        Instantiate(whiskasEffect, this.transform)
+            .GetComponent<WhiskasEffect>()
+            .Configure(paymentValue, GetWhiskasEffectColor(happinessLevel));
 
-        if(happinessLevel >= HappinessLevel.HAPPY)
-            Instantiate(happyEffect, this.transform);
+        RemoveDesiredItem();
     }
+    private WhiskasEffectColors GetWhiskasEffectColor(HappinessLevel happinessLevel){
+        return happinessLevel > HappinessLevel.REGULAR ? WhiskasEffectColors.BONUS : WhiskasEffectColors.REGULAR;
+    }
+
     private int GetPaymentValue(HappinessLevel happinessLevel){
         int goodValue =  GetDesiredItemValue();
        
@@ -98,10 +104,10 @@ public class Costumer : MonoBehaviour {
         float percentOfTime = 1 - (timeItemDelivered - timeItemSettled) / timeToExpireItem;
         Debug.Log("DeliveredAt:"+ percentOfTime);
 
-        if(percentOfTime > 0.8f )
+        if(percentOfTime > 0.7f )
             return HappinessLevel.SUPER_HAPPY;
         
-        if(percentOfTime > 0.6f)
+        if(percentOfTime > 0.3f)
             return HappinessLevel.HAPPY;
 
         return HappinessLevel.REGULAR;
@@ -114,11 +120,9 @@ public class Costumer : MonoBehaviour {
 
      
     private IEnumerator Cooldown(){
-        Debug.Log("Cooling down");
         isCoolingDown = true;
         yield return new WaitForSeconds(LevelManager.instance.GetGameConfig().costumerCooldownTime);
         isCoolingDown = false;
-        Debug.Log("NOT Cooling down");
     }
 
 }
