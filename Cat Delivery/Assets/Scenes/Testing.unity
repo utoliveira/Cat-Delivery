@@ -325,7 +325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 221776573}
   m_Layer: 5
-  m_Name: Always on screen viewport
+  m_Name: Always On Screen Space
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2592,9 +2592,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 131135219, guid: 7941b7e111a39a44c9cb23905e984d0a, type: 3}
-      propertyPath: speed
-      value: 75
+    - target: {fileID: 670892463, guid: 7941b7e111a39a44c9cb23905e984d0a, type: 3}
+      propertyPath: dashForce
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 5300562049874391296, guid: 7941b7e111a39a44c9cb23905e984d0a, type: 3}
       propertyPath: m_Name

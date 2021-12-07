@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 131135219}
   - component: {fileID: 1100274296}
   - component: {fileID: 962753002}
+  - component: {fileID: 670892463}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -189,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity_smoothing: 0.05
-  speed: 70
+  speed: 75
   jumpForce: 35
   rigidBody2D: {fileID: 1430225997}
   groundLayer:
@@ -244,6 +245,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
+--- !u!114 &670892463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5300562049874391296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cc0ebfd3cf66f54a8ed0dcccceaca77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashCooldown: 1
+  dashForce: 150
 --- !u!1 &7229438592721642537
 GameObject:
   m_ObjectHideFlags: 0
