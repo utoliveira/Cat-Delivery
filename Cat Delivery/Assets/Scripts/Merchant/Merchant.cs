@@ -89,4 +89,11 @@ public class Merchant : MonoBehaviour
     public List<Good> GetGoods() {
         return vendors.FindAll(vendor => vendor.GetGood() != null ).ConvertAll(vendor => vendor.GetGood());
     }
+
+    private void OnDestroy() {
+        Transporter[] transporters = GetComponentsInChildren<Transporter>();
+
+        foreach (Transporter transporter in transporters)
+            transporter.RemoveAllBeingTransported();
+    }
 }

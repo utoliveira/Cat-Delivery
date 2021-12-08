@@ -17,6 +17,10 @@ public class Transporter : MonoBehaviour
         }
     }
 
+    public void RemoveAllBeingTransported() {
+        this.transform.DetachChildren();
+    }
+
     private bool isPlayer(Collider2D other){
         return other.gameObject.CompareTag(Tags.PLAYER);
     }
