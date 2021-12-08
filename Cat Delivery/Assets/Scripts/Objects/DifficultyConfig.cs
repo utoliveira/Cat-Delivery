@@ -16,6 +16,8 @@ public class DifficultyConfig : ScriptableObject {
 
     public int maxCostumerHappiness = 3;
     public int minCostumerHappiness = -3;
+    
+    public float costumerCooldownTime = 1f;
 
     public int profitRate = 2;
    

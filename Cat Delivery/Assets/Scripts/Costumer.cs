@@ -121,7 +121,7 @@ public class Costumer : MonoBehaviour {
      
     private IEnumerator Cooldown(){
         isCoolingDown = true;
-        yield return new WaitForSeconds(LevelManager.instance.GetGameConfig().costumerCooldownTime);
+        yield return new WaitForSeconds(LevelManager.instance.GetDifficulty().costumerCooldownTime);
         isCoolingDown = false;
     }
 

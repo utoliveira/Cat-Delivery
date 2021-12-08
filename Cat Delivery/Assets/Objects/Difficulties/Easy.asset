@@ -16,7 +16,10 @@ MonoBehaviour:
   whiskasToNextLevel: 50
   maxMerchant: 2
   timeToSpawnMerchant: 4
-  timeToConfigureCostumer: 4
+  timeToConfigureCostumer: 5
+  maxCostumerHappiness: 3
+  minCostumerHappiness: 3
+  costumerCooldownTime: 3
   profitRate: 2
   velocityFactor: 1
   whiskasToEvolveBuildings: 25

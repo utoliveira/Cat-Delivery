@@ -15,8 +15,11 @@ MonoBehaviour:
   nextDifficulty: {fileID: 11400000, guid: 4eb08ecceef4f464c8b994f149550522, type: 2}
   whiskasToNextLevel: 100
   maxMerchant: 3
-  timeToSpawnMerchant: 4
-  timeToConfigureCostumer: 2
+  timeToSpawnMerchant: 3
+  timeToConfigureCostumer: 4
+  maxCostumerHappiness: 5
+  minCostumerHappiness: -3
+  costumerCooldownTime: 2
   profitRate: 3
   velocityFactor: 2
   whiskasToEvolveBuildings: 100
