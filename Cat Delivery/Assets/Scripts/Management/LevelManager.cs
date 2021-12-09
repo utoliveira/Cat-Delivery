@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private DifficultyConfig currentDifficulty;
     [SerializeField] private int whiskas = 5;
     private int lastBuildingLevel;
+    
     private void Awake() {
         if(instance){
             Destroy(this);

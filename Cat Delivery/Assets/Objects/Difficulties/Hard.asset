@@ -19,6 +19,7 @@ MonoBehaviour:
   timeToConfigureCostumer: 3
   maxCostumerHappiness: 10
   minCostumerHappiness: -3
+  costumerCooldownTime: 1
   profitRate: 4
   velocityFactor: 3
-  whiskasToEvolveBuildings: 500
+  whiskasToEvolveBuildings: 250

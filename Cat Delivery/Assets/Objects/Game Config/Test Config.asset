@@ -17,7 +17,9 @@ MonoBehaviour:
   availableGoods:
   - {fileID: 11400000, guid: 937789445035635439462210a350f32c, type: 2}
   - {fileID: 11400000, guid: 3208a01eb5080534392936b71a33aba4, type: 2}
-  - {fileID: 11400000, guid: 3fd61825a8e63a04295681466e3ead4f, type: 2}
+  - {fileID: 11400000, guid: 1d4d696b14a253f4bb7412c378d946f0, type: 2}
+  - {fileID: 11400000, guid: 205c7dc08c4998442bf3f6adaa40382c, type: 2}
+  - {fileID: 11400000, guid: 2340a188edbd37747af9f64980913ffa, type: 2}
   availableCostumers:
   - {fileID: 99070508230749234, guid: 4024960b634952a428fa7a6af1351c1d, type: 3}
   initialWhiskas: 10

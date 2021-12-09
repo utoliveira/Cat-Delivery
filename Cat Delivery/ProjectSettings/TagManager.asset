@@ -71,3 +71,6 @@ TagManager:
   - name: HUD
     uniqueID: 824492337
     locked: 0
+  - name: Menu
+    uniqueID: 2907260187
+    locked: 0

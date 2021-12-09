@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa85247749651694589265b6d3b4e9a2, type: 3}
-  m_Name: Flower
+  m_Name: Pie
   m_EditorClassIdentifier: 
-  code: flower
-  name: Flower
-  artwork: {fileID: 21300000, guid: 6a2b8f77e801fd743a3538d950b4e0c5, type: 3}
+  code: pie
+  name: Pie
+  artwork: {fileID: 21300000, guid: acd0d6ea6678e9246b3bb186d165c461, type: 3}
   weight: 0
-  basePrice: 1
+  basePrice: 10
   speed: 1
