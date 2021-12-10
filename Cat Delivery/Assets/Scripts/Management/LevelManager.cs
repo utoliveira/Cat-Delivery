@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameConfig gameConfig; //Change to LevelConfig
     [SerializeField] private DifficultyConfig currentDifficulty;
     [SerializeField] private int whiskas = 5;
-    private int lastBuildingLevel;
+    [SerializeField] private int catCookies = 0;
     
     private void Awake() {
         if(instance){
@@ -22,14 +22,22 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 1;
         whiskas = gameConfig.initialWhiskas;
         HUDManager.instance.UpdateWhiskas(whiskas);
+        HUDManager.instance.UpdateWhiskasLimit(currentDifficulty.whiskasToNextLevel);
 
         CostumerManager.instance.StartManagement(); //Change to stopAll with a Manager generic class Specific Manager
         MerchantManager.instance.StartManagement();
     }
 
     private void GoNextLevel(){
-        if(currentDifficulty.nextDifficulty != null)
-            this.currentDifficulty = currentDifficulty.nextDifficulty;
+        catCookies++;
+        if(currentDifficulty.nextDifficulty == null){
+            //TODO: Finish game
+            return;
+        }
+
+        this.currentDifficulty = currentDifficulty.nextDifficulty;
+        HUDManager.instance.UpdateCatCookies(catCookies);
+        HUDManager.instance.UpdateWhiskasLimit(currentDifficulty.whiskasToNextLevel);
         
         CostumerManager.instance.StartManagement(); //Change to stopAll with a Manager generic class Specific Manager
         MerchantManager.instance.StartManagement();
@@ -38,27 +46,14 @@ public class LevelManager : MonoBehaviour
     public void AddWhiskas(int whiskas, bool applyProfit = false){
         
         int amount = applyProfit ? whiskas * currentDifficulty.profitRate : whiskas;
-        
         this.whiskas += Mathf.Abs(amount);
-        
         HUDManager.instance.UpdateWhiskas(this.whiskas);
-
+        
         if(isAbleToGoNextLevel())
             GoNextLevel();
 
-        if(isAbleToEvolveBuilding()){
-            BuildingManager.instance.EvolveAnyBuilding();
-            lastBuildingLevel = GetCurrentBuildingLevel();
-        }
+        BuildingManager.instance.EvolveAnyBuildingIfPossible(this.whiskas);
         
-    }
-
-    private bool isAbleToEvolveBuilding() {
-        return lastBuildingLevel < GetCurrentBuildingLevel();
-    }
-
-    private int GetCurrentBuildingLevel(){
-        return (int) (this.whiskas / currentDifficulty.whiskasToEvolveBuildings);
     }
 
     private bool isAbleToGoNextLevel(){

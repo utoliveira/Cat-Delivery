@@ -22,4 +22,4 @@ MonoBehaviour:
   costumerCooldownTime: 2
   profitRate: 3
   velocityFactor: 2
-  whiskasToEvolveBuildings: 100
+  whiskasToEvolveBuildings: 50

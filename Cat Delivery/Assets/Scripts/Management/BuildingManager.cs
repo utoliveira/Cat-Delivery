@@ -6,7 +6,7 @@ public class BuildingManager : MonoBehaviour
 {
     [SerializeField] private List<Building> buildings;
     public static BuildingManager instance;
-
+    private int minWhiskasToEvolve = 0;
     private bool allBuildingsEvolved;
 
     private void Awake() {
@@ -18,9 +18,24 @@ public class BuildingManager : MonoBehaviour
         buildings = Helper.GetAllComponentsByTag<Building>(Tags.BUILDING);
     }
 
+    public void EvolveAnyBuildingIfPossible(int currentWhiskas){
+        if(!IsAbleToEvolve(currentWhiskas)) 
+            return;
 
-    public void EvolveAnyBuilding(){
-        if(allBuildingsEvolved) return;
+        minWhiskasToEvolve = currentWhiskas;
+        EvolveAnyBuilding();
+
+    }
+
+    private bool IsAbleToEvolve(int currentWhiskas){
+        return  HasEnoughWhiskasToEvolve(currentWhiskas)  && !allBuildingsEvolved;
+    }
+
+    private bool HasEnoughWhiskasToEvolve(int whiskas){
+        return whiskas > minWhiskasToEvolve && whiskas - minWhiskasToEvolve >= LevelManager.instance.GetDifficulty().whiskasToEvolveBuildings;
+    }
+
+    private void EvolveAnyBuilding(){
 
         Building evolvableBuilding = buildings.Find(building => building.hasNextLevel());
         
