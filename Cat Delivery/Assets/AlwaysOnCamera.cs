@@ -22,12 +22,14 @@ public class AlwaysOnCamera : MonoBehaviour {
     }
     
     private void LateUpdate() {
+
         Vector2 destination = initialPosition;
 
-        if(!IsObjectInsideViewport())
+        if(!IsObjectInsideViewport() && playerTransform){
             destination = GetNewPointCloserToPlayer();
+            Debug.DrawLine(playerTransform.position, destination, Color.green);
+        }
 
-        Debug.DrawLine(playerTransform.position, destination, Color.green);
         this.transform.position = Vector2.Lerp(this.transform.position, destination, movementSpeed * Time.deltaTime);
     }
 
