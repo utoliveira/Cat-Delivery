@@ -27,6 +27,8 @@ public class Vendor : MonoBehaviour
         Instantiate(whiskasEffect, this.transform.position, whiskasEffect.transform.rotation)
             .GetComponent<WhiskasEffect>()
             .Configure(-good.basePrice, WhiskasEffectColors.NEGATIVE);
+        
+        AudioManager.instance.Play(AudioCode.ITEM_COLLECTING);
     }
 
     public void SetGood(Good good){

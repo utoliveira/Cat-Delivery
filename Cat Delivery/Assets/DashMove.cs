@@ -49,6 +49,7 @@ public class DashMove : MonoBehaviour
         StartCoroutine(ApplyCooldown());
         dashDirection = 0;
         previousDirection = 0;
+        AudioManager.instance.Play(AudioCode.PLAYER_DASH);
     }
 
     private IEnumerator ApplyCooldown(){

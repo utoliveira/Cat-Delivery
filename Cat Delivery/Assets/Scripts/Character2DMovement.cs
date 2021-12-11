@@ -43,7 +43,8 @@ public class Character2DMovement : MonoBehaviour
         rigidBody2D.velocity = Vector2.SmoothDamp(rigidBody2D.velocity, targetVelocity, ref velocity, velocity_smoothing );
         
         if(jump && isGrounded){
-            rigidBody2D.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            Jump();
+
         }
     
         if(moveDown && isGrounded)
@@ -51,7 +52,7 @@ public class Character2DMovement : MonoBehaviour
         
         if(jump && isAbleToJumpInTheAir()){
             rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, 0);
-            rigidBody2D.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            Jump();
             jumpedTwice = true;
         }
 
@@ -61,6 +62,11 @@ public class Character2DMovement : MonoBehaviour
         else if(!isfacingRight &&  horizontalMove > 0)
             Flip();
         
+    }
+
+    private void Jump(){
+        rigidBody2D.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+        AudioManager.instance.Play(AudioCode.PLAYER_JUMP);
     }
 
     private bool isAbleToJumpInTheAir(){

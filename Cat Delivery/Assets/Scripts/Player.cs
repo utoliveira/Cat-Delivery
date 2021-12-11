@@ -92,6 +92,7 @@ public class Player : MonoBehaviour{
         if(other.gameObject.CompareTag(Tags.WATER)){
             Destroy(this.gameObject);
             LevelManager.instance.GameOver();
+            AudioManager.instance.Play(AudioCode.PLAYER_FALLS);
         }
     }
     

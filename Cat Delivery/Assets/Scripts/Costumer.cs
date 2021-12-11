@@ -44,6 +44,7 @@ public class Costumer : MonoBehaviour {
         CostumerManager.instance.RegisterCostumerHappiness(HappinessLevel.UNHAPPY);
         Instantiate(unhappyEffect, this.transform);
         RemoveDesiredItem();
+        AudioManager.instance.Play(AudioCode.ITEM_DELIVERY_FAILURE);
     }
 
     public Item GetDesiredItem(){
@@ -76,6 +77,7 @@ public class Costumer : MonoBehaviour {
             .Configure(paymentValue, GetWhiskasEffectColor(happinessLevel));
 
         RemoveDesiredItem();
+        AudioManager.instance.Play(AudioCode.ITEM_DELIVERING);
     }
     private WhiskasEffectColors GetWhiskasEffectColor(HappinessLevel happinessLevel){
         return happinessLevel > HappinessLevel.REGULAR ? WhiskasEffectColors.BONUS : WhiskasEffectColors.REGULAR;

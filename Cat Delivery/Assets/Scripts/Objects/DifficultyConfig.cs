@@ -27,5 +27,9 @@ public class DifficultyConfig : ScriptableObject {
     [Header("Buildings")]
     public float whiskasToEvolveBuildings;
 
+    public bool hasNextLevel(){
+        return this.nextDifficulty != null;
+    }
+
 
 }

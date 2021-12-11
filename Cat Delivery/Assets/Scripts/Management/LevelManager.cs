@@ -30,13 +30,19 @@ public class LevelManager : MonoBehaviour
 
     private void GoNextLevel(){
         catCookies++;
-        if(currentDifficulty.nextDifficulty == null){
+        if(currentDifficulty.hasNextLevel()){
+            AudioManager.instance.Play(AudioCode.LEVEL_CLEAR);
+            //AudioManager.instance.Play(AudioCode.LEVEL_CLEAR);
             //TODO: Finish game
             return;
+        }else{
+            AudioManager.instance.Play(AudioCode.DIFFICULTY_CLEAR);
         }
+        
+        HUDManager.instance.UpdateCatCookies(catCookies);
+
 
         this.currentDifficulty = currentDifficulty.nextDifficulty;
-        HUDManager.instance.UpdateCatCookies(catCookies);
         HUDManager.instance.UpdateWhiskasLimit(currentDifficulty.whiskasToNextLevel);
         
         CostumerManager.instance.StartManagement(); //Change to stopAll with a Manager generic class Specific Manager
@@ -70,6 +76,7 @@ public class LevelManager : MonoBehaviour
     public void GameOver(){
         Time.timeScale = 0;
         HUDManager.instance.GameOver();
+        AudioManager.instance.Play(AudioCode.GAME_OVER);
     }
 
     public int GetWhiskas(){
