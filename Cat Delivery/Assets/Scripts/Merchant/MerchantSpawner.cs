@@ -17,8 +17,9 @@ public class MerchantSpawner : MonoBehaviour
             spawnerPoint.transform.position,
             merchantPrefab.transform.rotation
         ).GetComponent<Merchant>();
-                        
-        merchant.Configure(spawnerPoint, LevelManager.instance.GetGameConfig().availableGoods);
+        
+        //Get the available Goods;
+        merchant.Configure(spawnerPoint, GetAvailableGoods()); //Change it to randomized and avoiding the last one 
         MerchantManager.instance.RegisterMerchant(merchant);
         return merchant;
     }
@@ -38,6 +39,10 @@ public class MerchantSpawner : MonoBehaviour
         return spawners[spawnerIndex];
     }
 
-
+    private List<Good> GetAvailableGoods(){
+        HashSet<Good> alreadySpawnedGoods = MerchantManager.instance.GetAvailableGood();
+        return LevelManager.instance.GetGameConfig().availableGoods.FindAll(good => !alreadySpawnedGoods.Contains(good));
+         
+    }
 
 }
