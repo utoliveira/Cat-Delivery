@@ -29,25 +29,27 @@ public class LevelManager : MonoBehaviour
     }
 
     private void GoNextLevel(){
-        catCookies++;
+        AddCatCookies();
         if(currentDifficulty.hasNextLevel()){
-            AudioManager.instance.Play(AudioCode.LEVEL_CLEAR);
-            //AudioManager.instance.Play(AudioCode.LEVEL_CLEAR);
-            //TODO: Finish game
-            return;
-        }else{
             AudioManager.instance.Play(AudioCode.DIFFICULTY_CLEAR);
+        }else{
+            //LOAD new level info
+            AudioManager.instance.Play(AudioCode.LEVEL_CLEAR);
+            NotificationManager.instance.Notify("New level unlocked"); // TODO change it to Scriptable Objects if needed
+            return;
         }
         
-        HUDManager.instance.UpdateCatCookies(catCookies);
-
-
         this.currentDifficulty = currentDifficulty.nextDifficulty;
         HUDManager.instance.UpdateWhiskasLimit(currentDifficulty.whiskasToNextLevel);
         
         CostumerManager.instance.StartManagement(); //Change to stopAll with a Manager generic class Specific Manager
         MerchantManager.instance.StartManagement();
         //Reset the costumer manager level 
+    }
+
+    private void AddCatCookies(){
+        catCookies++;
+        HUDManager.instance.UpdateCatCookies(catCookies);
     }
     public void AddWhiskas(int whiskas, bool applyProfit = false){
         

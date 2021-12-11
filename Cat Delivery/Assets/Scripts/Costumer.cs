@@ -83,6 +83,7 @@ public class Costumer : MonoBehaviour {
         return happinessLevel > HappinessLevel.REGULAR ? WhiskasEffectColors.BONUS : WhiskasEffectColors.REGULAR;
     }
 
+//Remove it to a ProfitManager
     private int GetPaymentValue(HappinessLevel happinessLevel){
         int goodValue =  GetDesiredItemValue();
        

@@ -6,7 +6,6 @@ public class AudioManager : MonoBehaviour {
     public List<AudioConfig> config = new List<AudioConfig>(); //Change it to another config
     private Dictionary<AudioCode, AudioSource> audioSources = new Dictionary<AudioCode, AudioSource>();
 
-
     private void Awake() {
 
         if(instance){
