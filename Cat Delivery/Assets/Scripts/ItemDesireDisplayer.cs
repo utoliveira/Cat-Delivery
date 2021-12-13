@@ -6,8 +6,7 @@ using UnityEngine.UI;
 public class ItemDesireDisplayer : ItemDisplayer{
     private float timeSpent = 0f;
     private float requiredTime = 8f;
-    [SerializeField] private Color initialColor;
-    [SerializeField] private Color finalColor;
+    [SerializeField] private Gradient color;
     [SerializeField] private Image panel; 
 
     private Coroutine current;
@@ -48,7 +47,7 @@ public class ItemDesireDisplayer : ItemDisplayer{
         timeSpent = 0;
         while(timeSpent < requiredTime){{
             this.timeSpent += Time.deltaTime;
-            panel.color = Color.Lerp(initialColor, finalColor, timeSpent / requiredTime);
+            panel.color = color.Evaluate(1 - timeSpent/requiredTime);
             yield return null; //TODO colocar alguns segundos aqui só pra n ficar fazendo o tempo todo?
         }}
     }

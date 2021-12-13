@@ -119,7 +119,8 @@ MonoBehaviour:
   animator: {fileID: 3518455020996927326}
   regularColor: {r: 1, g: 0.6431373, b: 0, a: 1}
   negativeColor: {r: 0.9647059, g: 0.3529412, b: 0.39215687, a: 1}
-  bonusColor: {r: 0.35686275, g: 0.8392157, b: 0.87058824, a: 1}
+  bonusColor: {r: 0.3577549, g: 0.9150943, b: 0.3496351, a: 1}
+  boosterColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!95 &3518455020996927326
 Animator:
   serializedVersion: 3
