@@ -9,21 +9,16 @@ public class Costumer : MonoBehaviour {
     [SerializeField] private ItemDesireDisplayer itemDisplay;
     [SerializeField] private GameObject unhappyEffect;
     [SerializeField] private GameObject whiskasEffect;
-
     private Coroutine expireCoroutine;
-
+    private SatisfactionEnum currentSatisfaction;
     private float timeToExpireItem = 8f;
     private int timeItemSettled; 
-
     private bool isCoolingDown;
      
      private void Start() {
          if(desiredItem){
             LoadDesiredItem();
          }
-     }
-     private void Update() {
-         StopCoroutine(ExpireDesireItem());
      }
 
 
@@ -41,16 +36,26 @@ public class Costumer : MonoBehaviour {
     private IEnumerator ExpireDesireItem(){
         timeItemSettled = DateTime.Now.Second;
         yield return new WaitForSeconds(timeToExpireItem);
-        CostumerManager.instance.RegisterCostumerHappiness(HappinessLevel.UNHAPPY);
         Instantiate(unhappyEffect, this.transform);
+        UpdateSatisfaction(SatisfactionEnum.UNHAPPY);
         RemoveDesiredItem();
         AudioManager.instance.Play(AudioCode.ITEM_DELIVERY_FAILURE);
+        CostumerManager.instance.CheckUnhappyCostumers();
+    }
+
+    private void UpdateSatisfaction(SatisfactionEnum newSatisfaction){
+        int satisfaction = ((int)this.currentSatisfaction) + (int)newSatisfaction;
+        satisfaction = Mathf.Clamp(satisfaction, (int)SatisfactionEnum.UNHAPPY, (int)SatisfactionEnum.SUPER_HAPPY);
+        this.currentSatisfaction = (SatisfactionEnum) satisfaction;
     }
 
     public Item GetDesiredItem(){
         return desiredItem;
     }
 
+    public SatisfactionEnum GetSatisfaction(){
+        return this.currentSatisfaction;
+    }
     public bool HasDesiredItem(){
         return GetDesiredItem() != null;
     }
@@ -67,54 +72,27 @@ public class Costumer : MonoBehaviour {
      }
 
      public void OnDesiredItemDeliver(){
-        HappinessLevel happinessLevel = GetHappiness();
-        CostumerManager.instance.RegisterCostumerHappiness(happinessLevel);
-        int paymentValue = GetPaymentValue(happinessLevel);
+        SatisfactionEnum satisfaction = GetSatisfactionOnDeliver();
+        UpdateSatisfaction(satisfaction);
+        
+        int paymentValue = SatisFactionHelper.GetPaymentValue(satisfaction, (Good)this.desiredItem);
         LevelManager.instance.AddWhiskas(paymentValue);
+        
+        if(satisfaction >= SatisfactionEnum.REGULAR)
+            CostumerManager.instance.CheckHappyCostumers();
         
         Instantiate(whiskasEffect, this.transform)
             .GetComponent<WhiskasEffect>()
-            .Configure(paymentValue, GetWhiskasEffectColor(happinessLevel));
+            .Configure(paymentValue, GetWhiskasEffectColor(satisfaction));
 
         RemoveDesiredItem();
         AudioManager.instance.Play(AudioCode.ITEM_DELIVERING);
     }
-    private WhiskasEffectColors GetWhiskasEffectColor(HappinessLevel happinessLevel){
-        return happinessLevel > HappinessLevel.REGULAR ? WhiskasEffectColors.BONUS : WhiskasEffectColors.REGULAR;
-    }
-
-//Remove it to a ProfitManager
-    private int GetPaymentValue(HappinessLevel happinessLevel){
-        int goodValue =  GetDesiredItemValue();
-       
-        switch(happinessLevel){
-            case HappinessLevel.SUPER_HAPPY:
-                return goodValue * 3;
-            
-            case HappinessLevel.HAPPY:
-                return goodValue * 2;
-            
-            default:
-                return goodValue;
-        }
-    }
-
-    private int GetDesiredItemValue(){
-        return ((Good) desiredItem).basePrice;
-    }
-    private HappinessLevel GetHappiness(){
+    private SatisfactionEnum GetSatisfactionOnDeliver(){
         int timeItemDelivered = DateTime.Now.Second;
-        float percentOfTime = 1 - (timeItemDelivered - timeItemSettled) / timeToExpireItem;
-        Debug.Log("DeliveredAt:"+ percentOfTime);
-
-        if(percentOfTime > 0.7f )
-            return HappinessLevel.SUPER_HAPPY;
-        
-        if(percentOfTime > 0.3f)
-            return HappinessLevel.HAPPY;
-
-        return HappinessLevel.REGULAR;
+        return SatisFactionHelper.GetDeliverSatisfaction(timeItemDelivered, timeItemSettled, timeToExpireItem);
     }
+
 
      private void LoadDesiredItem(){
         itemDisplay.ChangeItem(desiredItem);
@@ -127,5 +105,11 @@ public class Costumer : MonoBehaviour {
         yield return new WaitForSeconds(LevelManager.instance.GetDifficulty().costumerCooldownTime);
         isCoolingDown = false;
     }
+
+    
+    private WhiskasEffectColors GetWhiskasEffectColor(SatisfactionEnum satisfaction){
+        return satisfaction > SatisfactionEnum.REGULAR ? WhiskasEffectColors.BONUS : WhiskasEffectColors.REGULAR;
+    }
+
 
 }

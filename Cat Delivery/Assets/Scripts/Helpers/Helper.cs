@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Helper
+public static class Helper
 {
     public static List<T> GetAllComponentsByTag<T>(string tag){
         GameObject[] costumers = GameObject.FindGameObjectsWithTag(tag);

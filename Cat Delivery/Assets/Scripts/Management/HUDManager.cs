@@ -8,7 +8,7 @@ public class HUDManager : MonoBehaviour
     [SerializeField] private CatCookiesCounter catCookiesCounter;
     [SerializeField] private GameObject GameOverMenu;
     [SerializeField] private ItemsHUD itemsHUD;
-    [SerializeField] private CostumerHappinessHUD costumerHappinessHUD;
+    //[SerializeField] private CostumerHappinessHUD costumerHappinessHUD;
 
     private void Awake() {
         if(instance){
@@ -39,8 +39,8 @@ public class HUDManager : MonoBehaviour
         itemsHUD.AddItem(item);
     }
 
-    public void UpdateCostumerHappinessCounter(int actualAmount, HappinessLevel happinessLevel){
-        costumerHappinessHUD.UpdateCounter(actualAmount, happinessLevel);
+    public void UpdateCostumerHappinessCounter(int actualAmount){
+        //costumerHappinessHUD.UpdateCounter(actualAmount);
     }
 
     public void UpdateCatCookies(int cookiesAmount, bool resetWhiskas = false){

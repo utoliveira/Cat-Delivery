@@ -14,8 +14,8 @@ public class DifficultyConfig : ScriptableObject {
     [Header("Costumers")] [Space]
     public float timeToConfigureCostumer;
 
-    public int maxCostumerHappiness = 3;
-    public int minCostumerHappiness = -3;
+    public int maxHappyCostumersToBoost = 3;
+    public int maxUnhappyCostumersToGameOver = -3;
     
     public float costumerCooldownTime = 1f;
 

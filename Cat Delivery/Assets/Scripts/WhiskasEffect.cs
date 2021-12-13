@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public enum WhiskasEffectColors {
     REGULAR,
     NEGATIVE,
-    BONUS
+    BONUS,
+    BOOSTER,
 }
 
 public class WhiskasEffect : MonoBehaviour
@@ -17,6 +18,8 @@ public class WhiskasEffect : MonoBehaviour
     [SerializeField] private Color regularColor;
     [SerializeField] private Color negativeColor;
     [SerializeField] private Color bonusColor;
+
+    [SerializeField] private Color boosterColor;
     
 
     public void Configure(int whiskas, WhiskasEffectColors color){
@@ -28,15 +31,22 @@ public class WhiskasEffect : MonoBehaviour
         
         animator.enabled = true;
     }
+    
 
     private Color GetColor(WhiskasEffectColors color){
         switch(color){
             case WhiskasEffectColors.BONUS:
                 return bonusColor;
-            case WhiskasEffectColors.NEGATIVE:
-                return negativeColor;
+
             case WhiskasEffectColors.REGULAR:
                 return regularColor;
+
+            case WhiskasEffectColors.NEGATIVE:
+                return negativeColor;
+            
+            case WhiskasEffectColors.BOOSTER:
+                return boosterColor;
+
             default:
                 return regularColor;
         }

@@ -5,12 +5,9 @@ using UnityEngine;
 public class CostumerManager : MonoBehaviour
 {
     public static CostumerManager instance;
-
-    [SerializeField] private List<Costumer> costumers = new List<Costumer>();
-    private int costumersHappiness = 0;
-
     private Coroutine currentManagement; //Replace for abstract
 
+    [SerializeField] private List<Costumer> costumers = new List<Costumer>();
     private void Awake() {
         if(!instance){
             instance = this;
@@ -76,36 +73,25 @@ public class CostumerManager : MonoBehaviour
         this.costumers.RemoveAll( costumer => toRemove.Contains(costumer));
     }
 
-    public void RegisterCostumerHappiness(HappinessLevel happinessLevel){
 
-        switch(happinessLevel){
-            case HappinessLevel.UNHAPPY:
-                DecreaseHappinessLevel();
-                break;
-            case HappinessLevel.SUPER_HAPPY:
-                IncreaseHappinessLevel(2);
-                break;
-            case HappinessLevel.HAPPY:
-                IncreaseHappinessLevel(1);
-                break;
-        }
+    public void CheckUnhappyCostumers() {
+        int amountUnhappyCostumers = costumers
+            .FindAll(costumer => costumer.GetSatisfaction() == SatisfactionEnum.UNHAPPY)
+            .Count;
         
-        HUDManager.instance.UpdateCostumerHappinessCounter(costumersHappiness, happinessLevel);
-    }
-
-    private void DecreaseHappinessLevel(){
-        this.costumersHappiness--;
-
-        if(this.costumersHappiness < LevelManager.instance.GetDifficulty().minCostumerHappiness) //Change to getGameDifficulty
+        if(amountUnhappyCostumers >= LevelManager.instance.GetDifficulty().maxUnhappyCostumersToGameOver){
             LevelManager.instance.GameOver();
-    }
-
-    private void IncreaseHappinessLevel(int amountOfHappiness){
-        costumersHappiness += Mathf.Abs(amountOfHappiness);
-        int maxCostumerHappiness = LevelManager.instance.GetDifficulty().maxCostumerHappiness;
-        
-        if(costumersHappiness > maxCostumerHappiness){
-            costumersHappiness = maxCostumerHappiness;
         }
     }
+
+    public void CheckHappyCostumers() {
+        int amountHappyCostumers = costumers
+            .FindAll(costumer => costumer.GetSatisfaction() >= SatisfactionEnum.SUPER_HAPPY)
+            .Count;
+        
+        if(amountHappyCostumers >= LevelManager.instance.GetDifficulty().maxHappyCostumersToBoost){
+            Debug.Log("DA BOOST CARAMBA");
+        }
+    }
+
 }

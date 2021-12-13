@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Hard
   m_EditorClassIdentifier: 
   nextDifficulty: {fileID: 0}
-  whiskasToNextLevel: 250
+  whiskasToNextLevel: 150
   maxMerchant: 3
   timeToSpawnMerchant: 2
   timeToConfigureCostumer: 3
-  maxCostumerHappiness: 10
-  minCostumerHappiness: -3
+  maxHappyCostumersToBoost: 3
+  maxUnhappyCostumersToGameOver: 2
   costumerCooldownTime: 1
   profitRate: 4
   velocityFactor: 3

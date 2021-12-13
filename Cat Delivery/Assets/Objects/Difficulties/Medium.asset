@@ -17,8 +17,8 @@ MonoBehaviour:
   maxMerchant: 3
   timeToSpawnMerchant: 3
   timeToConfigureCostumer: 4
-  maxCostumerHappiness: 5
-  minCostumerHappiness: -3
+  maxHappyCostumersToBoost: 3
+  maxUnhappyCostumersToGameOver: 1
   costumerCooldownTime: 2
   profitRate: 3
   velocityFactor: 2
