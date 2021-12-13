@@ -9,4 +9,6 @@ public class Item : ScriptableObject
     public new string name;
     public Sprite artwork;
     public float weight;
+
+    public float desireTime = 8f;
 }

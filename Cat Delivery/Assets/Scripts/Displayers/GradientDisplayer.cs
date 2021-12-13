@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemDesireDisplayer : ItemDisplayer{
+public class GradientDisplayer : ItemDisplayer{
     private float timeSpent = 0f;
-    private float requiredTime = 8f;
+    private float timeToChangeColor =8f;
     [SerializeField] private Gradient color;
     [SerializeField] private Image panel; 
 
@@ -18,6 +18,11 @@ public class ItemDesireDisplayer : ItemDisplayer{
     public override void ChangeItem(Item item){
         base.ChangeItem(item);
         InitializeDisplay();
+    }
+
+    public void ChangeItem(Good good){
+        ChangeItem((Item)good);
+        timeToChangeColor = good.desireTime;
     }
 
     public void CleanDisplay(){
@@ -45,9 +50,9 @@ public class ItemDesireDisplayer : ItemDisplayer{
 
     private IEnumerator ChangeColorOverTime(){
         timeSpent = 0;
-        while(timeSpent < requiredTime){{
+        while(timeSpent < timeToChangeColor){{
             this.timeSpent += Time.deltaTime;
-            panel.color = color.Evaluate(1 - timeSpent/requiredTime);
+            panel.color = color.Evaluate(1 - timeSpent/timeToChangeColor);
             yield return null; //TODO colocar alguns segundos aqui só pra n ficar fazendo o tempo todo?
         }}
     }

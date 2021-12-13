@@ -61,7 +61,7 @@ public class Player : MonoBehaviour{
 
         if(playerBag.isEmpty()) return;
         
-        Good costumerGood = (Good) costumer.GetDesiredItem();
+        Good costumerGood = (Good) costumer.GetDesiredGood();
 
         if(!costumerGood) return;
         

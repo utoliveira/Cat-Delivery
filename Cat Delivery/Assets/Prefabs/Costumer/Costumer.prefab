@@ -317,7 +317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6805077725494508899, guid: 2cbeff0271de32f47bc676be6d910efe, type: 3}
       propertyPath: m_Name
-      value: Item Desire Display
+      value: Item Displayer
       objectReference: {fileID: 0}
     - target: {fileID: 6828270026868490598, guid: 2cbeff0271de32f47bc676be6d910efe, type: 3}
       propertyPath: m_Sprite
