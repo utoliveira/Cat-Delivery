@@ -10,6 +10,8 @@ TagManager:
   - Merchant
   - Building
   - Transporter
+  - ItemHandler
+  - ItemMaker
   layers:
   - Default
   - TransparentFX

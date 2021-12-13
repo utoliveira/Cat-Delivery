@@ -14,6 +14,8 @@ public class ItemStorage : MonoBehaviour
     }
 
     public void AddItem(Item item){
+        if(item == null) return;
+        
         if(storageLimit == items.Count)
             RemoveFirstItem();
         
@@ -21,8 +23,8 @@ public class ItemStorage : MonoBehaviour
         HUDManager.instance.AddItem(item);
     }
 
-    public Item RemoveItem(string itemName){
-        Item item = items.Find(item => item.name == itemName);
+    public Item RemoveItem(Item itemToRemove){
+        Item item = items.Find(item => item.name == itemToRemove.name);
         
         if(item){
             items.Remove(item);

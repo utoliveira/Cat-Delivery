@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 9085266239319301087}
   - component: {fileID: 3308976946218209512}
   m_Layer: 5
-  m_Name: Item Desire Display
+  m_Name: Desired Item Displayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

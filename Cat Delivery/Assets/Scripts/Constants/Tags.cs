@@ -6,4 +6,5 @@ public class Tags {
     public const string BUILDING = "Building";
     public const string PLAYER = "Player";
     public const string TRANSPORTER = "Transporter";
+    public const string ITEM_MAKER = "ItemMaker";
 }

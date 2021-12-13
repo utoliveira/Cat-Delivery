@@ -32,8 +32,11 @@ public class Player : MonoBehaviour{
                     case Tags.VENDOR:
                         BuyItem(collider.gameObject.GetComponent<Vendor>());
                         break;
-                    case Tags.COSTUMER:
+                    case Tags.COSTUMER: //CHANGE IT HERE TO logic be on Costumer's side
                         DeliverItem(collider.gameObject.GetComponent<Costumer>());
+                        break;
+                    case Tags.ITEM_MAKER:
+                        InteractWithItemMaker(collider.gameObject.GetComponent<ItemMaker>());
                         break;
                     default:
                         Debug.Log("Jogador confuso");
@@ -62,12 +65,22 @@ public class Player : MonoBehaviour{
 
         if(!costumerGood) return;
         
-        if(playerBag.RemoveItem(costumerGood.name)){
+        if(playerBag.RemoveItem(costumerGood)){
             costumer.OnDesiredItemDeliver();
             return;
         };
 
         Debug.Log("Jogador não tem item");
+    }
+
+    private void InteractWithItemMaker(ItemMaker itemMaker){
+
+        if(itemMaker.IsItemReady()){
+            playerBag.AddItem(itemMaker.DeliverItem());
+            return;
+        }
+
+        itemMaker.ReceiveItems(playerBag);
     }
 
     private void CheckMovement() {

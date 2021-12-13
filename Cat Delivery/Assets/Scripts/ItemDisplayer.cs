@@ -23,4 +23,5 @@ public class ItemDisplayer : MonoBehaviour
     public bool isDisplaying(Item item){
         return this.item && item && this.item.name == item.name;
     }
+    
 }
