@@ -6,6 +6,8 @@ public class ItemMaker : MonoBehaviour
     [SerializeField] private ItemMakerDisplayer displayer;
     [SerializeField] private ItemMakerConfig config;
 
+    [SerializeField] private GameObject whiskasEffect;
+
     private bool itemReady;
 
     private List<Item> currentRequiredItems;
@@ -40,13 +42,19 @@ public class ItemMaker : MonoBehaviour
     }
 
     public Item DeliverItem(){
-        if(!itemReady) 
+        if(!itemReady ||  !LevelManager.instance.RemoveWhiskas(config.serviceValue)) 
             return null; 
 
         AudioManager.instance.Play(AudioCode.ITEM_COLLECTING);
         Reset();
+       
+        Instantiate(whiskasEffect, this.transform.position, whiskasEffect.transform.rotation)
+            .GetComponent<WhiskasEffect>()
+            .Configure(-config.serviceValue, WhiskasEffectColors.NEGATIVE);
+
         return config.result;
     } 
+
 
     public bool IsItemReady(){
         return itemReady;

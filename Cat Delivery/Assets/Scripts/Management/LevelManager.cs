@@ -68,11 +68,12 @@ public class LevelManager : MonoBehaviour
         return this.whiskas > currentDifficulty.whiskasToNextLevel;
     }
 
-    public void RemoveWhiskas(int whiskas){
-        if(whiskas <= this.whiskas){
-            this.whiskas -= whiskas;
-            HUDManager.instance.UpdateWhiskas(this.whiskas);
-        } 
+    public bool RemoveWhiskas(int whiskas){
+        if(whiskas > this.whiskas) return false;
+
+        this.whiskas -= whiskas;
+        HUDManager.instance.UpdateWhiskas(this.whiskas);
+        return true;
     }
 
     public void GameOver(){
