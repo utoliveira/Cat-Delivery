@@ -65,7 +65,7 @@ public class LevelManager : MonoBehaviour
     }
 
     private bool isAbleToGoNextLevel(){
-        return this.whiskas > currentDifficulty.whiskasToNextLevel;
+        return this.whiskas >= currentDifficulty.whiskasToNextLevel;
     }
 
     public bool RemoveWhiskas(int whiskas){

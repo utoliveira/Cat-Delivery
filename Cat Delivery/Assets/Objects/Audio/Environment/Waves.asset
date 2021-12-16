@@ -16,4 +16,4 @@ MonoBehaviour:
   code: 8
   playOnAwake: 1
   loop: 1
-  volume: 0.3
+  volume: 0.12

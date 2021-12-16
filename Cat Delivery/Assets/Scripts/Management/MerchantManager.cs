@@ -49,7 +49,7 @@ public class MerchantManager : MonoBehaviour
     public HashSet<Good> GetAvailableGood() {
         HashSet<Good> availableGoods = new HashSet<Good>(); 
         currentMerchants
-            .FindAll(merchant =>  merchant.GetTraveledDistanceInPercent() < 0.6f)
+            .FindAll(merchant =>  merchant.GetTraveledDistanceInPercent() < 0.75f)
             .ForEach(merchant => availableGoods.UnionWith(merchant.GetGoods()));
 
         return availableGoods;

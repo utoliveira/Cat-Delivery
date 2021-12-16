@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Easy
   m_EditorClassIdentifier: 
   nextDifficulty: {fileID: 11400000, guid: d097b93757f1df04e9fa33a482812dc2, type: 2}
-  whiskasToNextLevel: 50
+  whiskasToNextLevel: 25
   maxMerchant: 2
   timeToSpawnMerchant: 4
   timeToConfigureCostumer: 5
   maxHappyCostumersToBoost: 3
-  maxUnhappyCostumersToGameOver: 2
+  maxUnhappyCostumersToGameOver: 3
   costumerCooldownTime: 3
   profitRate: 2
   velocityFactor: 1
-  whiskasToEvolveBuildings: 25
+  whiskasToEvolveBuildings: 50
