@@ -8,6 +8,10 @@ public class MenuManager : MonoBehaviour {
     public void StartGame(){
         SceneManager.LoadScene(Scenes.GAMEPLAY);
     }
+
+    public void StartScene(string name){
+        SceneManager.LoadScene(name);
+    }
     public void RestartGame(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

@@ -14,6 +14,8 @@ public class Costumer : MonoBehaviour {
     private int timeItemSettled; 
     private bool isCoolingDown;
 
+    [SerializeField] private bool applyExpireRoutine = true;
+
      public void SetDesiredItem(Good good){
 
         if(expireCoroutine != null)
@@ -24,8 +26,9 @@ public class Costumer : MonoBehaviour {
     }
 
     private void ConfigureDesiredGood(){
-        itemDisplay.ChangeItem(desiredGood);
-        expireCoroutine = StartCoroutine(ExpireDesireItem());
+        itemDisplay.ChangeItem(desiredGood, applyExpireRoutine);
+        if(applyExpireRoutine)
+            expireCoroutine = StartCoroutine(ExpireDesireItem());
     }
 
     private IEnumerator ExpireDesireItem(){

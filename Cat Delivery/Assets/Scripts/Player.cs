@@ -14,7 +14,9 @@ public class Player : MonoBehaviour{
     private bool jump;
     private bool moveDown;
     private float horizontalMove;
+    private bool inputEnable = true;
     private void Update() {
+        if(!inputEnable) return;
         CheckInteraction();
         CheckMovement();
     }
@@ -116,5 +118,9 @@ public class Player : MonoBehaviour{
 
     public void OnLandEvent(){
         animator.SetBool(PlayerConstants.ANIM_JUMP_PARAM, false);
+    }
+
+    public void SetEnableInput(bool enable){
+        inputEnable = enable;
     }
 }

@@ -8,6 +8,7 @@ public class GradientDisplayer : ItemDisplayer{
     private float timeToChangeColor =8f;
     [SerializeField] private Gradient color;
     [SerializeField] private Image panel; 
+    private bool applyGradient;
 
     private Coroutine current;
 
@@ -20,9 +21,10 @@ public class GradientDisplayer : ItemDisplayer{
         InitializeDisplay();
     }
 
-    public void ChangeItem(Good good){
+    public void ChangeItem(Good good, bool applyGradient = true){
         ChangeItem((Item)good);
         timeToChangeColor = good.desireTime;
+        this.applyGradient = applyGradient;
     }
 
     public void CleanDisplay(){
@@ -35,7 +37,8 @@ public class GradientDisplayer : ItemDisplayer{
         if(base.item){
             base.image.enabled = true;
             panel.enabled = true;
-            current = StartCoroutine(ChangeColorOverTime());
+            if(applyGradient)
+                current = StartCoroutine(ChangeColorOverTime());
             return;
         }
         CleanDisplay();
