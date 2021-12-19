@@ -7,7 +7,8 @@ using System;
 public class Costumer : MonoBehaviour {
     [SerializeField] private Good desiredGood;
     [SerializeField] private GradientDisplayer itemDisplay;
-    [SerializeField] private GameObject unhappyEffect;
+
+    [SerializeField] private Animator expressionsAnimator;
     [SerializeField] private GameObject whiskasEffect;
     private Coroutine expireCoroutine;
     private SatisfactionEnum currentSatisfaction;
@@ -34,7 +35,7 @@ public class Costumer : MonoBehaviour {
     private IEnumerator ExpireDesireItem(){
         timeItemSettled = DateTime.Now.Second;
         yield return new WaitForSeconds(desiredGood.desireTime);
-        Instantiate(unhappyEffect, this.transform);
+        expressionsAnimator.SetTrigger(ExpressionsConstants.ANIM_GET_DISAPPOINTED);
         UpdateSatisfaction(SatisfactionEnum.UNHAPPY);
         RemoveDesiredGood();
         AudioManager.instance.Play(AudioCode.ITEM_DELIVERY_FAILURE);
@@ -45,6 +46,14 @@ public class Costumer : MonoBehaviour {
         int satisfaction = ((int)this.currentSatisfaction) + (int)newSatisfaction;
         satisfaction = Mathf.Clamp(satisfaction, (int)SatisfactionEnum.UNHAPPY, (int)SatisfactionEnum.SUPER_HAPPY);
         this.currentSatisfaction = (SatisfactionEnum) satisfaction;
+
+        //TODO: Improve here
+        if(this.currentSatisfaction == SatisfactionEnum.UNHAPPY)
+            expressionsAnimator.SetBool(ExpressionsConstants.ANIM_IS_ANGRY, true);
+        
+        if(this.currentSatisfaction >= SatisfactionEnum.REGULAR)
+            expressionsAnimator.SetBool(ExpressionsConstants.ANIM_IS_ANGRY, false);
+        
     }
 
     public Good GetDesiredGood(){

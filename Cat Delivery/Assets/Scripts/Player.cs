@@ -6,6 +6,7 @@ public class Player : MonoBehaviour{
 
     [SerializeField] private Character2DMovement movementController;
     
+    [SerializeField] Transform interactionChecker;
     [SerializeField] private Animator animator;
     [SerializeField] private ItemStorage playerBag;
     [SerializeField] private float interactionRange = 0.5f;
@@ -27,7 +28,8 @@ public class Player : MonoBehaviour{
     
     private void CheckInteraction() {
         if(Input.GetButtonDown(PlayerConstants.INTERACTION_AXIS)) {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, interactionRange, interactableLayer);
+            animator.SetTrigger(PlayerConstants.ANIM_TAKE_PARAM);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(interactionChecker.position, interactionRange, interactableLayer);
 
             foreach(Collider2D collider in colliders){                
                 switch(collider.gameObject.tag){
@@ -113,7 +115,7 @@ public class Player : MonoBehaviour{
     
     private void OnDrawGizmos() {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, interactionRange);
+        Gizmos.DrawWireSphere(interactionChecker.position, interactionRange);
     }
 
     public void OnLandEvent(){
