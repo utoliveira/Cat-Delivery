@@ -88,6 +88,8 @@ public class Costumer : MonoBehaviour {
         if(satisfaction >= SatisfactionEnum.REGULAR)
             CostumerManager.instance.CheckHappyCostumers();
         
+        expressionsAnimator.SetTrigger(ExpressionsConstants.ANIM_LAUGH);
+        
         Instantiate(whiskasEffect, this.transform)
             .GetComponent<WhiskasEffect>()
             .Configure(paymentValue, GetWhiskasEffectColor(satisfaction));

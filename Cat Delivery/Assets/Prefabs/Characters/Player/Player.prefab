@@ -276,6 +276,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Artwork
       objectReference: {fileID: 0}
+    - target: {fileID: 4800942916351419538, guid: 14806410259fdb247ab35c1dcd93ea17, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5252595468495195744, guid: 14806410259fdb247ab35c1dcd93ea17, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.213
+      objectReference: {fileID: 0}
     - target: {fileID: 6115507343464669783, guid: 14806410259fdb247ab35c1dcd93ea17, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -318,6 +326,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6115507343464669783, guid: 14806410259fdb247ab35c1dcd93ea17, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6687804050798504537, guid: 14806410259fdb247ab35c1dcd93ea17, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 6687804050798504538, guid: 14806410259fdb247ab35c1dcd93ea17, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803405108915175446, guid: 14806410259fdb247ab35c1dcd93ea17, type: 3}
+      propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
