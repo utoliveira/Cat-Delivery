@@ -36,4 +36,8 @@ public class Vendor : MonoBehaviour
         ConfigureGood(good);
     }
 
+    public void Flip(){
+        this.transform.localScale = Helper.FlipHorizontal(this.transform.localScale);
+    }
+
 }

@@ -1,25 +1,13 @@
 fileFormatVersion: 2
-guid: d769b459da400654ca9d0ad93e5273a8
+guid: 75031b89a954ea04ea3207b03dad3356
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5303381277185446771
-    second: Balloon_1
+      213: 7642980859614939925
+    second: Jar
   - first:
-      213: 4167206948585228220
-    second: Balloon_2
-  - first:
-      213: -6601846466396469041
-    second: Angry_reaction
-  - first:
-      213: -6628337848623695947
-    second: Balloon_3
-  - first:
-      213: 9079273188753214778
-    second: Balloon_4
-  - first:
-      213: 1923876322242295690
-    second: Reactions_5
+      213: -174804484191063705
+    second: Box
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -121,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Balloon_1
+      name: Jar
       rect:
         serializedVersion: 2
-        x: 71
-        y: 92
-        width: 216
-        height: 154
+        x: 60
+        y: 89
+        width: 93
+        height: 129
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -135,20 +123,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 373981f4c25699940800000000000000
-      internalID: 5303381277185446771
+      spriteID: 51b457af892511a60800000000000000
+      internalID: 7642980859614939925
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Balloon_2
+      name: Box
       rect:
         serializedVersion: 2
-        x: 379
-        y: 106
-        width: 320
-        height: 100
+        x: 259
+        y: 100
+        width: 169
+        height: 99
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,92 +144,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb746f314a4e4d930800000000000000
-      internalID: 4167206948585228220
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Angry_reaction
-      rect:
-        serializedVersion: 2
-        x: 777
-        y: 99
-        width: 135
-        height: 133
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fc845cced978164a0800000000000000
-      internalID: -6601846466396469041
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Balloon_3
-      rect:
-        serializedVersion: 2
-        x: 948
-        y: 4
-        width: 306
-        height: 245
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5b7f18958d96304a0800000000000000
-      internalID: -6628337848623695947
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Balloon_4
-      rect:
-        serializedVersion: 2
-        x: 1333
-        y: 106
-        width: 161
-        height: 78
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a3d0d527cde000e70800000000000000
-      internalID: 9079273188753214778
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Reactions_5
-      rect:
-        serializedVersion: 2
-        x: 1335
-        y: 179
-        width: 6
-        height: 5
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a87790b625bf2ba10800000000000000
-      internalID: 1923876322242295690
+      spriteID: 76175ae6f38f29df0800000000000000
+      internalID: -174804484191063705
       vertices: []
       indices: 
       edges: []

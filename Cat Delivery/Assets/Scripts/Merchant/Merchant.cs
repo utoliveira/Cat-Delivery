@@ -34,12 +34,14 @@ public class Merchant : MonoBehaviour
         float speed = GetMerchantSpeed();
 
         if(originPoint.x > destinationPoint.x){
-            this.transform.localScale = new Vector2(-1f, 1f);
+            this.transform.localScale = Helper.FlipHorizontal(this.transform.localScale);
+            vendors.ForEach(vendor => vendor.Flip());
             this.speed = -speed;
         }else{
            this.speed = speed;
         }
     }
+
 
     private float GetAverageSpeedVendorsBased () {
         

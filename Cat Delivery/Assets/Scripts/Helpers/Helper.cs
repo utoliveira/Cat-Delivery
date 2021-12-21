@@ -18,5 +18,9 @@ public static class Helper
     public static T GetRandomized<T>(HashSet<T> set){
         return GetRandomized<T>(new List<T>(set));
     }
+
+    public static Vector3 FlipHorizontal(Vector3 original){
+        return new Vector3(-original.x, original.y, original.z);
+    }
     
 }
