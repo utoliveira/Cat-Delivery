@@ -8,7 +8,7 @@ public class BuildingManager : MonoBehaviour
     public static BuildingManager instance;
     private int minWhiskasToEvolve = 0;
     private bool allBuildingsEvolved;
-
+    /*
     private void Awake() {
         if(instance){
             Destroy(this);
@@ -30,6 +30,7 @@ public class BuildingManager : MonoBehaviour
     private bool IsAbleToEvolve(int currentWhiskas){
         return  HasEnoughWhiskasToEvolve(currentWhiskas)  && !allBuildingsEvolved;
     }
+
 
     private bool HasEnoughWhiskasToEvolve(int whiskas){
         return whiskas > minWhiskasToEvolve && whiskas - minWhiskasToEvolve >= LevelManager.instance.GetDifficulty().whiskasToEvolveBuildings;
@@ -95,6 +96,6 @@ public class BuildingManager : MonoBehaviour
 
 
     //Create a new Building(){}    
-
+*/
 
 }

@@ -1,13 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using System;
 
 public class Costumer : MonoBehaviour {
     [SerializeField] private Good desiredGood;
     [SerializeField] private GradientDisplayer itemDisplay;
-
     [SerializeField] private Animator expressionsAnimator;
     [SerializeField] private GameObject whiskasEffect;
     private Coroutine expireCoroutine;
@@ -18,16 +15,14 @@ public class Costumer : MonoBehaviour {
     [SerializeField] private bool applyExpireRoutine = true;
 
      public void SetDesiredItem(Good good){
-
-        if(expireCoroutine != null)
-            StopCoroutine(expireCoroutine);
-        
+        ClearExpireCoroutine();
         this.desiredGood = good;
         ConfigureDesiredGood();
     }
 
     private void ConfigureDesiredGood(){
         itemDisplay.ChangeItem(desiredGood, applyExpireRoutine);
+        
         if(applyExpireRoutine)
             expireCoroutine = StartCoroutine(ExpireDesireItem());
     }
@@ -39,7 +34,7 @@ public class Costumer : MonoBehaviour {
         UpdateSatisfaction(SatisfactionEnum.UNHAPPY);
         RemoveDesiredGood();
         AudioManager.instance.Play(AudioCode.ITEM_DELIVERY_FAILURE);
-        CostumerManager.instance.CheckUnhappyCostumers();
+        //CostumerManager.instance.CheckUnhappyCostumers();
     }
 
     private void UpdateSatisfaction(SatisfactionEnum newSatisfaction){
@@ -73,10 +68,15 @@ public class Costumer : MonoBehaviour {
      private void RemoveDesiredGood(){
         desiredGood = null;
         itemDisplay.CleanDisplay();
-        StopCoroutine(expireCoroutine);
-        StartCoroutine(Cooldown());
+        ClearExpireCoroutine();
+        //StartCoroutine(Cooldown());
         expireCoroutine = null;
      }
+    
+    private void ClearExpireCoroutine(){
+        if(expireCoroutine != null)
+            StopCoroutine(expireCoroutine);
+    }
 
      public void OnDesiredItemDeliver(){
         SatisfactionEnum satisfaction = GetSatisfactionOnDeliver();
@@ -85,12 +85,12 @@ public class Costumer : MonoBehaviour {
         int paymentValue = SatisFactionHelper.GetPaymentValue(satisfaction, this.desiredGood);
         LevelManager.instance.AddWhiskas(paymentValue);
         
-        if(satisfaction >= SatisfactionEnum.REGULAR)
-            CostumerManager.instance.CheckHappyCostumers();
+        //if(satisfaction >= SatisfactionEnum.REGULAR)
+        //    CostumerManager.instance.CheckHappyCostumers();
         
         expressionsAnimator.SetTrigger(ExpressionsConstants.ANIM_LAUGH);
         
-        Instantiate(whiskasEffect, this.transform)
+        Instantiate(whiskasEffect, this.transform.position, whiskasEffect.transform.rotation, this.transform)
             .GetComponent<WhiskasEffect>()
             .Configure(paymentValue, GetWhiskasEffectColor(satisfaction));
 
@@ -98,16 +98,19 @@ public class Costumer : MonoBehaviour {
         AudioManager.instance.Play(AudioCode.ITEM_DELIVERING);
     }
     private SatisfactionEnum GetSatisfactionOnDeliver(){
+        if(!applyExpireRoutine) 
+            return SatisfactionEnum.HAPPY;
+
         int timeItemDelivered = DateTime.Now.Second;
         return SatisFactionHelper.GetDeliverSatisfaction(timeItemDelivered, timeItemSettled, desiredGood.desireTime);
     }
 
-     
+     /*
     private IEnumerator Cooldown(){
         isCoolingDown = true;
         yield return new WaitForSeconds(LevelManager.instance.GetDifficulty().costumerCooldownTime);
         isCoolingDown = false;
-    }
+    }*/
 
     
     private WhiskasEffectColors GetWhiskasEffectColor(SatisfactionEnum satisfaction){

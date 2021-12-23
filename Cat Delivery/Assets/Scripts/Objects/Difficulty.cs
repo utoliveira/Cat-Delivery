@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName ="New Difficulty Config", menuName ="Config/Difficulty Config")]
-public class DifficultyConfig : ScriptableObject {
-    public DifficultyConfig nextDifficulty;
+public class Difficulty : ScriptableObject {
+    public Difficulty nextDifficulty;
     public int whiskasToNextLevel;
+
+    public bool playerCanDie = true;
     
     [Header("Merchant")] [Space]
     public int maxMerchant;
@@ -27,7 +29,7 @@ public class DifficultyConfig : ScriptableObject {
     [Header("Buildings")]
     public float whiskasToEvolveBuildings;
 
-    public bool hasNextLevel(){
+    public bool hasNextDifficulty(){
         return this.nextDifficulty != null;
     }
 

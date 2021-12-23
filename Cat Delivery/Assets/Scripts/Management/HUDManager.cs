@@ -8,7 +8,6 @@ public class HUDManager : MonoBehaviour
     [SerializeField] private CatCookiesCounter catCookiesCounter;
     [SerializeField] private GameObject GameOverMenu;
     [SerializeField] private ItemsHUD itemsHUD;
-    //[SerializeField] private CostumerHappinessHUD costumerHappinessHUD;
 
     private void Awake() {
         if(instance){
@@ -19,12 +18,16 @@ public class HUDManager : MonoBehaviour
         instance = this;
     }
 
-
     public void UpdateWhiskas(int whiskas){
-        whiskasCounter.UpdateCurrentWhiskas(whiskas);
+        if(Helper.isDefined(whiskasCounter)){
+            whiskasCounter.UpdateCurrentWhiskas(whiskas);
+        }
     }
     
     public void UpdateWhiskasLimit(int limit){
+        if(!whiskasCounter){
+            Debug.LogWarning("Whiskas counter undefined");
+        }
         whiskasCounter.UpdateLimit(limit);
     }
 

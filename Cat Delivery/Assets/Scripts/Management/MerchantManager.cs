@@ -9,17 +9,17 @@ public class MerchantManager : MonoBehaviour
     private List<Merchant> currentMerchants  = new List<Merchant>();
     [SerializeField] private MerchantSpawner spawner;
     private Coroutine currentManagement;
-
+ /*
     public void StartManagement() {
         if(currentManagement != null)
             StopCoroutine(currentManagement);
             
         currentManagement = StartCoroutine(SpawnNewMerchants());
     }
-    
+   
     private IEnumerator SpawnNewMerchants() {
         
-        DifficultyConfig difficulty = LevelManager.instance.GetDifficulty();
+        Difficulty difficulty = LevelManager.instance.GetDifficulty();
 
         while(true){
             if(currentMerchants.Count < difficulty.maxMerchant){
@@ -54,5 +54,6 @@ public class MerchantManager : MonoBehaviour
 
         return availableGoods;
     }
+    */
 
 }

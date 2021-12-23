@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70de78754270996499a0505e42b11808, type: 3}
   m_Name: Test Config
   m_EditorClassIdentifier: 
+  initialDifficulty: {fileID: 11400000, guid: 7791875747c7a4341b03dd40e29de986, type: 2}
   availableMerchants:
   - {fileID: 3789380578693243149, guid: 1cbd199ebb8c2734aa8ebde90163bb6e, type: 3}
   availableGoods:
@@ -23,3 +24,5 @@ MonoBehaviour:
   availableCostumers:
   - {fileID: 99070508230749234, guid: 4024960b634952a428fa7a6af1351c1d, type: 3}
   initialWhiskas: 10
+  enableCostumerManager: 1
+  enableMerchantManager: 1

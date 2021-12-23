@@ -8,7 +8,7 @@ public class MerchantSpawner : MonoBehaviour
     
     public GameObject merchantPrefab; //TODO: Change to variable merchants and boats
     private int lastSpawnIndex = 0;
-
+    /*
     public Merchant SpawnMerchant(){
         TrajectoryInitialPoint spawnerPoint =  getNextSpawnerPoint();
         
@@ -30,8 +30,6 @@ public class MerchantSpawner : MonoBehaviour
         int spawnerIndex = 0;
         
         while(spawners.Length > 1 && spawnerIndex == lastSpawnIndex){
-            //Maybe not that bad to keep the previous one
-            Debug.Log("GET RANDOM SPAWN");
             spawnerIndex = Random.Range(0, spawners.Length);
         }
 
@@ -44,5 +42,5 @@ public class MerchantSpawner : MonoBehaviour
         return LevelManager.instance.GetGameConfig().availableGoods.FindAll(good => !alreadySpawnedGoods.Contains(good));
          
     }
-
+    */
 }

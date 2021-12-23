@@ -23,4 +23,10 @@ public static class Helper
         return new Vector3(-original.x, original.y, original.z);
     }
     
+    public static bool isDefined(Object value){
+        if(value != null) return true;
+        Debug.LogWarning("The component " + nameof(value) + " is undefined");
+        return false;
+    }
+
 }

@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class Merchant : MonoBehaviour
 {
-    //[SerializeField] private Rigidbody2D rigidBody2D;
     [SerializeField] private float speed;
     [SerializeField] private List<Vendor> vendors;
 
     private Vector3 originPoint;
     private Vector3 destinationPoint;
-    private void FixedUpdate() {
-        //Vector2 target = new Vector2(speed * Time.deltaTime, rigidBody2D.velocity.y);
-        //rigidBody2D.velocity = Vector2.MoveTowards(rigidBody2D.velocity, destinationPoint, speed * Time.deltaTime);    
-        //rigidBody2D.velocity = new Vector2(speed * Time.deltaTime, rigidBody2D.velocity.y);    
+    private void FixedUpdate() {  
         this.transform.position = new Vector3(speed * Time.deltaTime, 0,0 ) + this.transform.position;
     }
 
@@ -60,9 +56,7 @@ public class Merchant : MonoBehaviour
         if(vendors == null) 
             return -10; //The object will travel in the opposite direction and destroy itself
             
-        float averageSpeed = GetAverageSpeedVendorsBased();
-
-        return averageSpeed  * LevelManager.instance.GetDifficulty().velocityFactor;
+        return GetAverageSpeedVendorsBased();
     }
 
     public float GetTraveledDistanceInPercent(){

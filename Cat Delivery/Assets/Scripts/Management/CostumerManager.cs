@@ -16,7 +16,7 @@ public class CostumerManager : MonoBehaviour
         }
         Destroy(this);
     }
-
+    /*
     public void StartManagement() {
         if(currentManagement != null)
             StopCoroutine(currentManagement);
@@ -25,7 +25,7 @@ public class CostumerManager : MonoBehaviour
     }
 
     private IEnumerator ConfigureCostumersDesires(){
-        DifficultyConfig difficulty = LevelManager.instance.GetDifficulty();
+        Difficulty difficulty = LevelManager.instance.GetDifficulty();
        
         while(true){
             yield return new WaitForSeconds(difficulty.timeToConfigureCostumer);   
@@ -93,5 +93,5 @@ public class CostumerManager : MonoBehaviour
             Debug.Log("DA BOOST CARAMBA");
         }
     }
-
+*/
 }

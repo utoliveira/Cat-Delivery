@@ -107,9 +107,8 @@ public class Player : MonoBehaviour{
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag(Tags.WATER)){
-            Destroy(this.gameObject);
-            LevelManager.instance.GameOver();
             AudioManager.instance.Play(AudioCode.PLAYER_FALLS);
+            LevelManager.instance.OnPlayerDies(this.gameObject);
         }
     }
     

@@ -8,11 +8,6 @@ public class WhiskasCounter : MonoBehaviour
     [SerializeField] private Text currentWhiskas;
     [SerializeField] private Text limitWhiskas;
 
-    private void Start() {
-        UpdateCurrentWhiskas(0);
-        UpdateLimit(0);  
-    }
-
     public void UpdateLimit(int limit){
         limitWhiskas.text = "/ " + limit.ToString();
     }
