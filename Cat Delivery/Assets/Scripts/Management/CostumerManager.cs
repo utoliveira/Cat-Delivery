@@ -16,24 +16,23 @@ public class CostumerManager : MonoBehaviour
         }
         Destroy(this);
     }
-    /*
+    
     public void StartManagement() {
         if(currentManagement != null)
             StopCoroutine(currentManagement);
-
+        
         currentManagement = StartCoroutine(ConfigureCostumersDesires());
     }
 
     private IEnumerator ConfigureCostumersDesires(){
-        Difficulty difficulty = LevelManager.instance.GetDifficulty();
        
         while(true){
-            yield return new WaitForSeconds(difficulty.timeToConfigureCostumer);   
+            yield return new WaitForSeconds(LevelManager.GetCostumerConfig().timeToConfigureCostumer);   
             Costumer costumer = Helper.GetRandomized<Costumer>(GetAvailableCostumers());
             
             if(!costumer) continue;
             
-            Good good = Helper.GetRandomized<Good>(MerchantManager.instance.GetAvailableGood());
+            Good good = Helper.GetRandomized<Good>(MerchantManager.instance.GetAlreadySpawnedGoods());
             
             if(good != null) costumer.SetDesiredItem(good);
         }
@@ -42,6 +41,7 @@ public class CostumerManager : MonoBehaviour
     public List<Costumer> GetAvailableCostumers () {
         return costumers.FindAll(costumer => !costumer.HasDesiredItem() && !costumer.IsCoolingDown());
     }
+    /*
 
     public void ConfigureNewCostumers(Transform spawnPosition) {
 
@@ -56,7 +56,6 @@ public class CostumerManager : MonoBehaviour
 
         RegisterCostumer(newCostumer);
     }
-
 
     public void RegisterCostumer(Costumer costumer){
         this.costumers.Add(costumer);
@@ -73,13 +72,14 @@ public class CostumerManager : MonoBehaviour
         this.costumers.RemoveAll( costumer => toRemove.Contains(costumer));
     }
 
+*/
 
     public void CheckUnhappyCostumers() {
         int amountUnhappyCostumers = costumers
             .FindAll(costumer => costumer.GetSatisfaction() == SatisfactionEnum.UNHAPPY)
             .Count;
         
-        if(amountUnhappyCostumers >= LevelManager.instance.GetDifficulty().maxUnhappyCostumersToGameOver){
+        if(amountUnhappyCostumers >= LevelManager.GetCostumerConfig().maxUnhappyCostumersToGameOver){
             LevelManager.instance.GameOver();
         }
     }
@@ -89,9 +89,8 @@ public class CostumerManager : MonoBehaviour
             .FindAll(costumer => costumer.GetSatisfaction() >= SatisfactionEnum.SUPER_HAPPY)
             .Count;
         
-        if(amountHappyCostumers >= LevelManager.instance.GetDifficulty().maxHappyCostumersToBoost){
+        if(amountHappyCostumers >= LevelManager.GetCostumerConfig().maxHappyCostumersToBoost){
             Debug.Log("DA BOOST CARAMBA");
         }
     }
-*/
 }

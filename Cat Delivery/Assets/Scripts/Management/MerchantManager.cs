@@ -9,26 +9,7 @@ public class MerchantManager : MonoBehaviour
     private List<Merchant> currentMerchants  = new List<Merchant>();
     [SerializeField] private MerchantSpawner spawner;
     private Coroutine currentManagement;
- /*
-    public void StartManagement() {
-        if(currentManagement != null)
-            StopCoroutine(currentManagement);
-            
-        currentManagement = StartCoroutine(SpawnNewMerchants());
-    }
-   
-    private IEnumerator SpawnNewMerchants() {
-        
-        Difficulty difficulty = LevelManager.instance.GetDifficulty();
-
-        while(true){
-            if(currentMerchants.Count < difficulty.maxMerchant){
-                spawner.SpawnMerchant();
-            }
-            yield return new WaitForSeconds(difficulty.timeToSpawnMerchant);
-        }
-    }
-
+ 
     private void Awake() {
         if(!instance){
             instance = this;
@@ -38,15 +19,40 @@ public class MerchantManager : MonoBehaviour
     }
     
 
+    public void StartManagement() {
+        if(currentManagement != null)
+            StopCoroutine(currentManagement);
+            
+        currentManagement = StartCoroutine(SpawnNewMerchants());
+    }
+   
+    private IEnumerator SpawnNewMerchants() {
+        
+        while(true){
+            if(currentMerchants.Count < LevelManager.GetMerchantConfig().maxMerchant){
+                List<Good> availableGoods = GetAvailableGoodsToSpawn(LevelManager.GetGameConfig().goods);
+
+                Merchant merchant = spawner.SpawnMerchant(availableGoods, LevelManager.GetGameConfig().merchantPrefab);
+                RegisterMerchant(merchant);
+            }
+            yield return new WaitForSeconds(LevelManager.GetMerchantConfig().timeToSpawnMerchant);
+        }
+    }
+
     public void UnRegisterMerchant(Merchant merchant){
         currentMerchants.Remove(merchant);
     }
 
-    public void RegisterMerchant(Merchant merchant){
+    private void RegisterMerchant(Merchant merchant){
         currentMerchants.Add(merchant);
     }
 
-    public HashSet<Good> GetAvailableGood() {
+    public List<Good> GetAvailableGoodsToSpawn(List<Good> allGoods){
+        HashSet<Good> alreadySpawnedGoods = GetAlreadySpawnedGoods();
+        return allGoods.FindAll(good => !alreadySpawnedGoods.Contains(good));
+    }
+
+    public HashSet<Good> GetAlreadySpawnedGoods() {
         HashSet<Good> availableGoods = new HashSet<Good>(); 
         currentMerchants
             .FindAll(merchant =>  merchant.GetTraveledDistanceInPercent() < 0.75f)
@@ -54,6 +60,5 @@ public class MerchantManager : MonoBehaviour
 
         return availableGoods;
     }
-    */
 
 }

@@ -5,12 +5,16 @@ using UnityEngine;
 public class ItemStorage : MonoBehaviour
 {
     
-    [SerializeField] private List<Item> items = new List<Item>();
+    private List<Item> items = new List<Item>();
     
     private int storageLimit = 3; 
 
     public bool isEmpty(){
         return items.Count < 1;
+    }
+
+    public List<Item> GetItems(){
+        return items;
     }
 
     public void AddItem(Item item){
@@ -23,17 +27,21 @@ public class ItemStorage : MonoBehaviour
         HUDManager.instance.AddItem(item);
     }
 
-    public Item RemoveItem(Item itemToRemove){
-        Item item = items.Find(item => item.name == itemToRemove.name);
-        
-        if(item){
-            items.Remove(item);
-            HUDManager.instance.RemoveItem(item);
-            return item;
-        }
+    public bool RemoveItem(Item item){
+        if(!item) return false;
 
-        return null;
+        items.Remove(item);
+        HUDManager.instance.RemoveItem(item);
+        return true;
     }
+
+    public bool RemoveItems(List<Item> items){  
+        if(items == null || items.Count < 1 ) return false;
+
+        items.ForEach(item => RemoveItem(item));
+        return true;
+    }
+
 
     public void RemoveFirstItem(){
         if(items.Count == 0 ) return;

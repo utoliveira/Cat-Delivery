@@ -11,4 +11,15 @@ public class Item : ScriptableObject
     public float weight;
 
     public float desireTime = 8f;
+
+    public override bool Equals(object obj){
+        if (obj == null || GetType() != obj.GetType())
+            return false;
+        
+        return ((Item)obj).code == this.code;
+    }
+    
+    public override int GetHashCode(){
+        return base.GetHashCode();
+    }
 }

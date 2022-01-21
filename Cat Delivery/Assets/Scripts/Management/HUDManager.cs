@@ -8,6 +8,7 @@ public class HUDManager : MonoBehaviour
     [SerializeField] private CatCookiesCounter catCookiesCounter;
     [SerializeField] private GameObject GameOverMenu;
     [SerializeField] private ItemsHUD itemsHUD;
+    [SerializeField] private MultiItemDeliverHUD multiItemDeliverHUD;
 
     private void Awake() {
         if(instance){
@@ -51,6 +52,10 @@ public class HUDManager : MonoBehaviour
             UpdateWhiskas(0);
         
         catCookiesCounter.UpdateCounter(cookiesAmount);
+    }
+
+    public void OpenMultiItemDeliver(IItemDelivearable origin, ItemStorage itemStorage){
+        multiItemDeliverHUD.Open(origin, itemStorage);
     }
 
 }

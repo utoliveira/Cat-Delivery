@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [CreateAssetMenu(
     fileName ="New Level Config",
@@ -7,6 +8,7 @@ public class LevelConfig : ScriptableObject {
 
     public Difficulty initialDifficulty;
     public int initialWhiskas;
-    public bool startOnAwake = true;
+    public List<Good> goods;
+    public GameObject merchantPrefab;
 
 }

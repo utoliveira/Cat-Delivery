@@ -81,10 +81,11 @@ public class Player : MonoBehaviour{
 
         if(itemMaker.IsItemReady()){
             playerBag.AddItem(itemMaker.DeliverItem());
+            AudioManager.instance.Play(AudioCode.ITEM_COLLECTING);
             return;
         }
 
-        itemMaker.ReceiveItems(playerBag);
+        itemMaker.OnTryToDeliver(playerBag);
     }
 
     private void CheckMovement() {

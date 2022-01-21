@@ -5,11 +5,9 @@ using UnityEngine;
 public class MerchantSpawner : MonoBehaviour
 {
     [SerializeField] private TrajectoryInitialPoint[] spawners;
-    
-    public GameObject merchantPrefab; //TODO: Change to variable merchants and boats
     private int lastSpawnIndex = 0;
-    /*
-    public Merchant SpawnMerchant(){
+    
+    public Merchant SpawnMerchant(List<Good> availableGoods, GameObject merchantPrefab){
         TrajectoryInitialPoint spawnerPoint =  getNextSpawnerPoint();
         
         Merchant merchant = Instantiate(
@@ -18,13 +16,9 @@ public class MerchantSpawner : MonoBehaviour
             merchantPrefab.transform.rotation
         ).GetComponent<Merchant>();
         
-        //Get the available Goods;
-        merchant.Configure(spawnerPoint, GetAvailableGoods()); //Change it to randomized and avoiding the last one 
-        MerchantManager.instance.RegisterMerchant(merchant);
+        merchant.Configure(spawnerPoint, availableGoods); //Change it to randomized and avoiding the last one 
         return merchant;
     }
-
-
 
     private TrajectoryInitialPoint getNextSpawnerPoint(){
         int spawnerIndex = 0;
@@ -37,10 +31,4 @@ public class MerchantSpawner : MonoBehaviour
         return spawners[spawnerIndex];
     }
 
-    private List<Good> GetAvailableGoods(){
-        HashSet<Good> alreadySpawnedGoods = MerchantManager.instance.GetAvailableGood();
-        return LevelManager.instance.GetGameConfig().availableGoods.FindAll(good => !alreadySpawnedGoods.Contains(good));
-         
-    }
-    */
 }

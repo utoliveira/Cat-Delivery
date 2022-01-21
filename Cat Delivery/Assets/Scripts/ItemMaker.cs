@@ -1,73 +1,76 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
-public class ItemMaker : MonoBehaviour
-{
+public class ItemMaker : MonoBehaviour, IItemDelivearable{
     [SerializeField] private ItemMakerDisplayer displayer;
-    [SerializeField] private ItemMakerConfig config;
-
-    [SerializeField] private GameObject whiskasEffect;
-
+    [SerializeField] private List<ItemRecipe> recipies;
+    private ItemRecipe currentRecipe;
     private bool itemReady;
 
-    private List<Item> currentRequiredItems;
-
-    private void Start() {
-        displayer.Configure(config);
-        currentRequiredItems = new List<Item>(config.requiredItems);
-    }
-
-
-    public void ReceiveItems(ItemStorage itemStorage){
-        if(itemStorage == null  || itemStorage.isEmpty()) 
+    public void OnTryToDeliver(ItemStorage itemStorage){
+        if(itemStorage == null  || itemStorage.isEmpty() || currentRecipe){
+            AudioManager.instance.Play(AudioCode.ITEM_DELIVERY_FAILURE);
             return;
-        
-        List<Item> removedItems = currentRequiredItems
-            .FindAll(item => itemStorage.RemoveItem(item) != null);
-        
-        if(removedItems.Count < 1) return;
+        }
 
-        removedItems.ForEach(item => {
-            displayer.ChangeRequiredItemColor(item);
-            currentRequiredItems.Remove(item);
-        });
+        List<ItemRecipe> recipes = GetAllRecipes(itemStorage.GetItems());
 
-        AudioManager.instance.Play(AudioCode.ITEM_COLLECTING);
-        
-        if(CheckAllRequirementsComplete()){
-            displayer.ChangeResultColor();
-            itemReady = true;
+        if(recipes.Count == 0){
+            //Show animation
+            AudioManager.instance.Play(AudioCode.ITEM_DELIVERY_FAILURE);
+            return;
+        }
+
+        if(recipes.Count == 1){
+            ReceiveItems(itemStorage.GetItems(), itemStorage);
+            return;
         }
         
+        HUDManager.instance.OpenMultiItemDeliver(this, itemStorage);
+        
+    }
+    
+    public bool ReceiveItems(List<Item> items, ItemStorage storage){
+        List<ItemRecipe> recipes = GetAllRecipes(items); // In case of receiving by MultiItemDeliver, this is important
+        
+        if(recipes.Count < 1) {
+            return false;
+            //doesnt have any recipe, just put a bad sound
+        }
+
+        storage.RemoveItems(recipes[0].items);
+        AudioManager.instance.Play(AudioCode.ITEM_COLLECTING);
+        StartCoroutine(ProduceItem(recipes[0]));
+        return true;
+    }
+
+    private IEnumerator ProduceItem(ItemRecipe recipe){
+        displayer.Configure(recipe);
+        this.currentRecipe = recipe;
+        yield return new WaitForSeconds(recipe.timeToProduce);
+        displayer.ChangeResultColor();
+        itemReady = true;
     }
 
     public Item DeliverItem(){
-        if(!itemReady ||  !LevelManager.instance.RemoveWhiskas(config.serviceValue)) 
-            return null; 
-
-        AudioManager.instance.Play(AudioCode.ITEM_COLLECTING);
+        Item result = currentRecipe.result;
         Reset();
-       
-        Instantiate(whiskasEffect, this.transform.position, whiskasEffect.transform.rotation)
-            .GetComponent<WhiskasEffect>()
-            .Configure(-config.serviceValue, WhiskasEffectColors.NEGATIVE);
-
-        return config.result;
+        return result;
     } 
 
+    private List<ItemRecipe> GetAllRecipes(List<Item> items){
+        return recipies == null ? new List<ItemRecipe>() : recipies.FindAll(recipe => recipe.hasExactRequirements(items));
+    }
 
     public bool IsItemReady(){
         return itemReady;
     }
 
     private void Reset(){
-        currentRequiredItems = new List<Item>(config.requiredItems);
         displayer.Reset();
         itemReady = false;
-    }
-
-    private bool CheckAllRequirementsComplete(){
-        return currentRequiredItems.Count < 1;
+        currentRecipe = null;
     }
 
 

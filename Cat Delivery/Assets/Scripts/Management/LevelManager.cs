@@ -5,11 +5,11 @@ public class LevelManager : MonoBehaviour
     public static LevelManager instance; 
     [SerializeField] private LevelConfig config;
     [SerializeField] UnityEvent OnLevelClearEvents;
-    
     private Difficulty currentDifficulty;
     private int whiskas;
     private int catCookies;
-    [SerializeField] private Transform playerSpawn;    
+    [SerializeField] private Transform playerSpawn;
+    public bool playOnAwake;
     private void Awake() {
         if(instance){
             Destroy(this);
@@ -18,14 +18,25 @@ public class LevelManager : MonoBehaviour
         instance = this;
     }
 
+    private void Start() {
+        if(playOnAwake){
+            StartManager();
+        }
+    }
+
     public void StartManager(){
         Time.timeScale = 1;
+        
+        if(!config) {
+            Debug.LogWarning("Level without config");
+            return;
+        }
+
         SetupConfig();
+        StartManagers();
     }
 
     private void SetupConfig(){
-        if(!config) return;
-
         whiskas = config.initialWhiskas;
         HUDManager.instance.UpdateWhiskas(whiskas);
         
@@ -33,17 +44,21 @@ public class LevelManager : MonoBehaviour
         HUDManager.instance.UpdateWhiskasLimit(currentDifficulty.whiskasToNextLevel);
     }
 
+    private void StartManagers() {
+        if(MerchantManager.instance) MerchantManager.instance.StartManagement();
+        if(CostumerManager.instance) CostumerManager.instance.StartManagement();
+    }
 
     private void OnLevelClear(){
         AudioManager.instance.Play(AudioCode.LEVEL_CLEAR);
         OnLevelClearEvents.Invoke();
-        Debug.Log("Cabou");
     }
 
     private void SetupNewDifficulty(){
         AudioManager.instance.Play(AudioCode.DIFFICULTY_CLEAR);
         this.currentDifficulty = currentDifficulty.nextDifficulty;
         HUDManager.instance.UpdateWhiskasLimit(currentDifficulty.whiskasToNextLevel);
+        StartManagers();
     }
 
     private void AddCatCookies(){
@@ -51,7 +66,7 @@ public class LevelManager : MonoBehaviour
         HUDManager.instance.UpdateCatCookies(catCookies);
     }
     public void AddWhiskas(int whiskas, bool applyProfit = false){
-        int amount = applyProfit ? whiskas * currentDifficulty.profitRate : whiskas;
+        int amount = applyProfit ? whiskas * currentDifficulty.costumers.profitRate : whiskas;
         this.whiskas += Mathf.Abs(amount);
         HUDManager.instance.UpdateWhiskas(this.whiskas);
         
@@ -102,8 +117,18 @@ public class LevelManager : MonoBehaviour
         return whiskas;
     }
 
-    public LevelConfig GetGameConfig(){
-        return config;
+    public static LevelConfig GetGameConfig(){
+        return instance.config;
+    }
+    public static Difficulty GetCurrentDifficulty(){
+        return instance.currentDifficulty;
+    }
+
+    public static MerchantConfig GetMerchantConfig(){
+        return GetCurrentDifficulty().merchants;
+    }
+    public static CostumerConfig GetCostumerConfig(){
+        return GetCurrentDifficulty().costumers;
     }
 
 }

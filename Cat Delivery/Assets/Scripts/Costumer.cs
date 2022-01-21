@@ -69,7 +69,7 @@ public class Costumer : MonoBehaviour {
         desiredGood = null;
         itemDisplay.CleanDisplay();
         ClearExpireCoroutine();
-        //StartCoroutine(Cooldown());
+        StartCoroutine(Cooldown());
         expireCoroutine = null;
      }
     
@@ -104,13 +104,11 @@ public class Costumer : MonoBehaviour {
         int timeItemDelivered = DateTime.Now.Second;
         return SatisFactionHelper.GetDeliverSatisfaction(timeItemDelivered, timeItemSettled, desiredGood.desireTime);
     }
-
-     /*
     private IEnumerator Cooldown(){
         isCoolingDown = true;
-        yield return new WaitForSeconds(LevelManager.instance.GetDifficulty().costumerCooldownTime);
+        yield return new WaitForSeconds(LevelManager.GetCostumerConfig().costumerCooldownTime);
         isCoolingDown = false;
-    }*/
+    }
 
     
     private WhiskasEffectColors GetWhiskasEffectColor(SatisfactionEnum satisfaction){

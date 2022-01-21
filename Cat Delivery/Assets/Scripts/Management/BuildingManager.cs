@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
 {
+    /*
     [SerializeField] private List<Building> buildings;
+    
     public static BuildingManager instance;
     private int minWhiskasToEvolve = 0;
     private bool allBuildingsEvolved;
-    /*
+
     private void Awake() {
         if(instance){
             Destroy(this);
