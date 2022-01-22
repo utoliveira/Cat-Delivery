@@ -8,14 +8,14 @@ public class ItemMaker : MonoBehaviour, IItemDelivearable{
     private ItemRecipe currentRecipe;
     private bool itemReady;
 
-    public void OnTryToDeliver(ItemStorage itemStorage){
-        if(itemStorage == null  || itemStorage.isEmpty() || currentRecipe){
+    public void OnTryToDeliver(ItemStorage storage){
+        if(storage == null  || storage.isEmpty() || currentRecipe){
             AudioManager.instance.Play(AudioCode.ITEM_DELIVERY_FAILURE);
             return;
         }
 
-        List<ItemRecipe> recipes = GetAllRecipes(itemStorage.GetItems());
-
+        List<ItemRecipe> recipes = GetAllPossibleRecipes(storage.GetItems());
+        Debug.Log("Recipes Available:" + recipes.Count);
         if(recipes.Count == 0){
             //Show animation
             AudioManager.instance.Play(AudioCode.ITEM_DELIVERY_FAILURE);
@@ -23,29 +23,29 @@ public class ItemMaker : MonoBehaviour, IItemDelivearable{
         }
 
         if(recipes.Count == 1){
-            ReceiveItems(itemStorage.GetItems(), itemStorage);
+            StartCoroutine(ProduceItem(recipes[0], storage));
             return;
         }
         
-        HUDManager.instance.OpenMultiItemDeliver(this, itemStorage);
+        HUDManager.instance.OpenMultiItemDeliver(this, storage);
         
     }
-    
+
     public bool ReceiveItems(List<Item> items, ItemStorage storage){
-        List<ItemRecipe> recipes = GetAllRecipes(items); // In case of receiving by MultiItemDeliver, this is important
+        ItemRecipe recipe = GetRecipe(items); 
         
-        if(recipes.Count < 1) {
+        if(!recipe) {
+            AudioManager.instance.Play(AudioCode.ITEM_DELIVERY_FAILURE);
             return false;
-            //doesnt have any recipe, just put a bad sound
         }
 
-        storage.RemoveItems(recipes[0].items);
-        AudioManager.instance.Play(AudioCode.ITEM_COLLECTING);
-        StartCoroutine(ProduceItem(recipes[0]));
+        StartCoroutine(ProduceItem(recipe, storage));
         return true;
     }
 
-    private IEnumerator ProduceItem(ItemRecipe recipe){
+    private IEnumerator ProduceItem(ItemRecipe recipe, ItemStorage storage){
+        storage.RemoveItems(recipe.items);
+        AudioManager.instance.Play(AudioCode.ITEM_COLLECTING);
         displayer.Configure(recipe);
         this.currentRecipe = recipe;
         yield return new WaitForSeconds(recipe.timeToProduce);
@@ -59,8 +59,12 @@ public class ItemMaker : MonoBehaviour, IItemDelivearable{
         return result;
     } 
 
-    private List<ItemRecipe> GetAllRecipes(List<Item> items){
-        return recipies == null ? new List<ItemRecipe>() : recipies.FindAll(recipe => recipe.hasExactRequirements(items));
+    private List<ItemRecipe> GetAllPossibleRecipes(List<Item> items){
+        return recipies == null ? new List<ItemRecipe>() : recipies.FindAll(recipe => recipe.hasAllRequirements(items));
+    }
+
+    private ItemRecipe GetRecipe(List<Item> items){
+        return recipies == null ? null : recipies.Find(recipe => recipe.hasExactRequirements(items));
     }
 
     public bool IsItemReady(){

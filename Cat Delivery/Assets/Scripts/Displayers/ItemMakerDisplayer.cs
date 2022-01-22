@@ -8,6 +8,7 @@ public class ItemMakerDisplayer : MonoBehaviour
     private List<ColorableDisplayer> requiredItemsDisplayer = new List<ColorableDisplayer>();
     [SerializeField] private Transform requiredItemsPanel; 
     [SerializeField] private ColorableDisplayer resultItem;
+    [SerializeField] private GameObject colorableDisplayerPrefab;
 
     public void Configure(ItemRecipe recipe){
 
@@ -15,14 +16,15 @@ public class ItemMakerDisplayer : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        recipe.items.ForEach(item => SetupRequiredItems(item, recipe.colorableDisplayerPrefab));
+        recipe.items.ForEach(item => SetupRequiredItems(item, colorableDisplayerPrefab));
         resultItem.ChangeItem(recipe.result);
         this.gameObject.SetActive(true);
     }
 
     private void SetupRequiredItems(Item item, GameObject prefab){
-        ColorableDisplayer itemDisplayer =  Instantiate(prefab, requiredItemsPanel).GetComponent<ColorableDisplayer>();
-        itemDisplayer.ChangeToFinalColor();
+        ColorableDisplayer itemDisplayer =  Instantiate(prefab, requiredItemsPanel)
+            .GetComponent<ColorableDisplayer>();
+        
         requiredItemsDisplayer.Add(itemDisplayer);
         itemDisplayer.ChangeItem(item);
     }

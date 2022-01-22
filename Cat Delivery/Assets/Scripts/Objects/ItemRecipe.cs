@@ -2,25 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="New Item Maker Config", menuName ="Config/Item Maker")]
+[CreateAssetMenu(fileName ="New Item Recipe Config", menuName ="Config/Item Recipe")]
 public class ItemRecipe : ScriptableObject
 {
     public List<Item> items;
     public Item result;
-    public int serviceValue;
-    public GameObject colorableDisplayerPrefab;
-
     public float timeToProduce = 1f;
 
-    public bool hasExactRequirements(List<Item> items){
+    public bool hasAllRequirements(List<Item> items){
         List<Item> requiredItems = new List<Item>(this.items);
-        int usableItemsCount = 0;
+
         items.ForEach(item => {
             requiredItems.Remove(item);
-            usableItemsCount++;
         });
         
-        return requiredItems.Count == 0 && items.Count == usableItemsCount;
+        return requiredItems.Count == 0 ;
+    }
+
+    
+    public bool hasExactRequirements(List<Item> itemsToCompare){
+        int usableItemsCount = 0; 
+        List<Item> requiredItems = new List<Item>(this.items);
+        itemsToCompare.ForEach(item => {
+            usableItemsCount += requiredItems.Remove(item) ? 1 : 0;
+        });
+
+        return requiredItems.Count == 0 && usableItemsCount == itemsToCompare.Count ;
     }
 
 }
