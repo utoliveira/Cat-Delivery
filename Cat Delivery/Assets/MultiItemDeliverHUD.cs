@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class MultiItemDeliverHUD : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class MultiItemDeliverHUD : MonoBehaviour
     [SerializeField] private GameObject displayerPrefab;
     private IItemDelivearable origin;
     private ItemStorage itemStorage; //TODO N TÁ LEGAL AQUI EIN
+
+    private int displayerInSelection = 0;
 
     private bool isOpen = false;
 
@@ -41,19 +44,18 @@ public class MultiItemDeliverHUD : MonoBehaviour
 
     public void Close(){
         Time.timeScale = 1f;  //Put this with disabled game controllers
+        this.gameObject.SetActive(false);
 
         displayers.Clear();
         origin = null;
-        this.gameObject.SetActive(false);
-
-        foreach(Transform child in this.transform){
-            Destroy(child.gameObject);
-        }
-
         isOpen = false;
+        foreach(Transform child in this.transform)
+            Destroy(child.gameObject);
+    
     }
 
     private void Update() {
+
         if(Input.GetButtonDown(PlayerConstants.CANCEL)){
             Close();
             return;
@@ -63,5 +65,9 @@ public class MultiItemDeliverHUD : MonoBehaviour
             DeliverItems();
             return;
         }
+    }
+
+    private void IncrementDisplayerSelection(){
+        displayerInSelection += displayerInSelection > displayers.Count - 1 ? 1 : -displayerInSelection;
     }
 }

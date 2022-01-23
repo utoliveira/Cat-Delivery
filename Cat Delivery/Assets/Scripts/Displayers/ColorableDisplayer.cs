@@ -2,41 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class ColorableDisplayer : ItemDisplayer
 {
     [SerializeField] private Color initialColor;
-    [SerializeField] private Color finalColor;
     [SerializeField] private Image panel;
-    private bool isFinalColor;
 
     private void Start() {
-        ChangePanelColor(initialColor);
+        ChangeColor(initialColor);
     }
 
     public override void ChangeItem(Item item){
         base.ChangeItem(item);
-        ChangePanelColor(initialColor);
-        isFinalColor = false;
     }
 
-    public void ChangeToFinalColor(){
-        ChangePanelColor(finalColor);
-        isFinalColor = true;
-    }
     public void ResetColor(){
-        ChangePanelColor(initialColor);
-        isFinalColor = false;
+        ChangeColor(initialColor);
     }
 
-    private void ChangePanelColor(Color color){
+    public void ChangeColor(Color color){
         if(panel != null) panel.color = color;
     }
-
-    public bool IsFinalColor(){
-        return isFinalColor;
+    
+    public void ChangeColor(Color color, float transitionTime){
+        if(panel != null) panel.DOColor(color, transitionTime);
     }
 
+    private void OnDestroy() {
+        panel.DOKill();
+    }
 
-    
 }

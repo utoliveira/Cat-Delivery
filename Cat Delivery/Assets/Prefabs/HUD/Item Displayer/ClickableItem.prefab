@@ -149,6 +149,8 @@ MonoBehaviour:
   image: {fileID: 8425009796996318215}
   item: {fileID: 0}
   panel: {fileID: 8425009796643247460}
+  initialColor: {r: 0.24857599, g: 0.70386374, b: 0.9245283, a: 1}
+  selectedColor: {r: 0.9339623, g: 0.6300822, b: 0.19824673, a: 1}
 --- !u!1 &8425009796996318213
 GameObject:
   m_ObjectHideFlags: 0

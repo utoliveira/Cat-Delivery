@@ -49,7 +49,7 @@ public class ItemMaker : MonoBehaviour, IItemDelivearable{
         displayer.Configure(recipe);
         this.currentRecipe = recipe;
         yield return new WaitForSeconds(recipe.timeToProduce);
-        displayer.ChangeResultColor();
+        displayer.ShowResultItem();
         itemReady = true;
     }
 
