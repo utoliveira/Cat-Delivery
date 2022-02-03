@@ -9,8 +9,9 @@ public class Item : ScriptableObject
     public new string name;
     public Sprite artwork;
     public float weight;
-
     public float desireTime = 8f;
+    
+    public Color mainColor = Color.black;
 
     public override bool Equals(object obj){
         if (obj == null || GetType() != obj.GetType())

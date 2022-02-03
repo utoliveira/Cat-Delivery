@@ -17,5 +17,6 @@ MonoBehaviour:
   artwork: {fileID: 21300000, guid: 406e89c482e2de3499e25a3020d1e340, type: 3}
   weight: 2
   desireTime: 8
+  mainColor: {r: 0, g: 0.22459786, b: 0.6226415, a: 1}
   basePrice: 5
   speed: 2

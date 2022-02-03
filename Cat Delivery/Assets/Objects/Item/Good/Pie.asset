@@ -16,5 +16,7 @@ MonoBehaviour:
   name: Pie
   artwork: {fileID: 21300000, guid: acd0d6ea6678e9246b3bb186d165c461, type: 3}
   weight: 0
+  desireTime: 8
+  mainColor: {r: 0.8679245, g: 0.43247992, b: 0.036845837, a: 1}
   basePrice: 10
   speed: 1

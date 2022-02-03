@@ -24,13 +24,11 @@ public class AudioManager : MonoBehaviour {
 
         audioSources[code].Play();
     }
-
-    private void AddAudioSource(AudioConfig config){
+    public void AddAudioSource(AudioConfig config){
         AudioSource newSource = this.gameObject.AddComponent<AudioSource>();
         newSource.clip = config.clip;
         newSource.loop = config.loop;
         newSource.volume = config.volume;
-
 
         if(audioSources.ContainsKey(config.code))
             audioSources.Remove(config.code);

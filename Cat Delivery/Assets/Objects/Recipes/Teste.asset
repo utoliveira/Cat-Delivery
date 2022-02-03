@@ -15,5 +15,4 @@ MonoBehaviour:
   items:
   - {fileID: 11400000, guid: 3208a01eb5080534392936b71a33aba4, type: 2}
   result: {fileID: 11400000, guid: 2340a188edbd37747af9f64980913ffa, type: 2}
-  serviceValue: 2
-  colorableDisplayerPrefab: {fileID: 5739396756297891088, guid: 6dbd782335729a644b5d236cf435d7fe, type: 3}
+  timeToProduce: 4

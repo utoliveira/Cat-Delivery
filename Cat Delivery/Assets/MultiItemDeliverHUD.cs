@@ -5,7 +5,6 @@ using DG.Tweening;
 
 public class MultiItemDeliverHUD : MonoBehaviour
 {
-
     List<ClickableItemDisplayer> displayers = new List<ClickableItemDisplayer>();
     [SerializeField] private GameObject displayerPrefab;
     private IItemDelivearable origin;

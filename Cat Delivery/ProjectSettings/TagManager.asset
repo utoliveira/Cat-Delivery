@@ -61,6 +61,9 @@ TagManager:
   - name: Merchant
     uniqueID: 1048090581
     locked: 0
+  - name: Objects
+    uniqueID: 3113953459
+    locked: 0
   - name: NPCs
     uniqueID: 3245990723
     locked: 0

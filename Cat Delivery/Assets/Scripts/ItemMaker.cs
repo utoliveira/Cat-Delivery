@@ -1,12 +1,15 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ItemMaker : MonoBehaviour, IItemDelivearable{
     [SerializeField] private ItemMakerDisplayer displayer;
     [SerializeField] private List<ItemRecipe> recipies;
-    private ItemRecipe currentRecipe;
-    private bool itemReady;
+    protected ItemRecipe currentRecipe;
+    protected bool itemReady;
+    [SerializeField] UnityEvent onProduceStart;
+    [SerializeField] UnityEvent onProduceEnd;
 
     public void OnTryToDeliver(ItemStorage storage){
         if(storage == null  || storage.isEmpty() || currentRecipe){
@@ -44,13 +47,28 @@ public class ItemMaker : MonoBehaviour, IItemDelivearable{
     }
 
     private IEnumerator ProduceItem(ItemRecipe recipe, ItemStorage storage){
+        StartItemProduction(recipe, storage);
+        yield return new WaitForSeconds(recipe.timeToProduce);
+        FinishItemProduction();
+    }
+
+    private void StartItemProduction(ItemRecipe recipe, ItemStorage storage){
+        OnStartProduction(recipe);
         storage.RemoveItems(recipe.items);
         AudioManager.instance.Play(AudioCode.ITEM_COLLECTING);
         displayer.Configure(recipe);
         this.currentRecipe = recipe;
-        yield return new WaitForSeconds(recipe.timeToProduce);
+        if(onProduceStart != null) 
+            onProduceStart.Invoke();
+    }
+    protected virtual void OnStartProduction(ItemRecipe recipe){}
+
+    private void FinishItemProduction(){
         displayer.ShowResultItem();
         itemReady = true;
+
+        if(onProduceEnd != null)
+            onProduceEnd.Invoke();
     }
 
     public Item DeliverItem(){
@@ -76,6 +94,5 @@ public class ItemMaker : MonoBehaviour, IItemDelivearable{
         itemReady = false;
         currentRecipe = null;
     }
-
 
 }
