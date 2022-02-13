@@ -2381,7 +2381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8185535907322195593, guid: fb8fc904b02de26498673f2e7ec68b97, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.1366644
+      value: -1.1366653
       objectReference: {fileID: 0}
     - target: {fileID: 8185535907322195593, guid: fb8fc904b02de26498673f2e7ec68b97, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2462,6 +2462,10 @@ PrefabInstance:
     - target: {fileID: 2180425550762258147, guid: aa26625f01823f4438c4f19ce88ba604, type: 3}
       propertyPath: m_Name
       value: Japanese Platform (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256438988888932002, guid: aa26625f01823f4438c4f19ce88ba604, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4256438988888932003, guid: aa26625f01823f4438c4f19ce88ba604, type: 3}
       propertyPath: m_LocalScale.x
@@ -4192,6 +4196,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Japanese Platform
       objectReference: {fileID: 0}
+    - target: {fileID: 4256438988888932002, guid: aa26625f01823f4438c4f19ce88ba604, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5103304363827610713, guid: aa26625f01823f4438c4f19ce88ba604, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -4443,7 +4451,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1984824292}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1366644, y: 3.6, z: -10}
+  m_LocalPosition: {x: -1.1366653, y: 3.6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
