@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextDifficulty: {fileID: 11400000, guid: 97981103f9d7d1a4882b332058ec7258, type: 2}
   whiskasToNextLevel: 25
-  playerCanDie: 0
+  playerCanDie: 1
   merchants:
     velocityFactor: 1
     maxMerchant: 1

@@ -24,6 +24,11 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void StopManager(){
+        if(MerchantManager.instance) MerchantManager.instance.StopManagement();
+        if(CostumerManager.instance) CostumerManager.instance.StopManagement();
+    }
+
     public void StartManager(){
         Time.timeScale = 1;
         

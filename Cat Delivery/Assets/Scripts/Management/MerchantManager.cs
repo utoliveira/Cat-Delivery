@@ -18,11 +18,14 @@ public class MerchantManager : MonoBehaviour
         Destroy(this);
     }
     
-
-    public void StartManagement() {
+    public void StopManagement(){
         if(currentManagement != null)
             StopCoroutine(currentManagement);
-            
+
+    }
+
+    public void StartManagement() {
+        StopManagement();
         currentManagement = StartCoroutine(SpawnNewMerchants());
     }
    
