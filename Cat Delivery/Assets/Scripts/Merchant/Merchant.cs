@@ -92,4 +92,8 @@ public class Merchant : MonoBehaviour
         foreach (Transporter transporter in transporters)
             transporter.RemoveAllBeingTransported();
     }
+
+    public void Deactivate(){
+        vendors.ForEach(vendor => vendor.gameObject.SetActive(false));
+    }
 }

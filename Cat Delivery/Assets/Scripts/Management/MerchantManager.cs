@@ -18,9 +18,12 @@ public class MerchantManager : MonoBehaviour
         Destroy(this);
     }
     
-    public void StopManagement(){
+    public void StopManagement(bool deactivateMerchants = false){
         if(currentManagement != null)
             StopCoroutine(currentManagement);
+
+        if(deactivateMerchants)
+            currentMerchants.ForEach(merchant => merchant.Deactivate());
 
     }
 

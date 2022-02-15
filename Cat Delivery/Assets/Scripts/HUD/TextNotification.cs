@@ -16,4 +16,8 @@ public class TextNotification : Notification
     public void HideText(){
         text.DOFade(0, 0.2f);
     }
+
+    private void OnDestroy() {
+        DOTween.Kill(this);
+    }
 }

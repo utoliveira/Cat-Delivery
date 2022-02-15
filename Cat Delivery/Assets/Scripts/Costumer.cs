@@ -65,7 +65,7 @@ public class Costumer : MonoBehaviour {
         return isCoolingDown;
     }
 
-     private void RemoveDesiredGood(){
+    public void RemoveDesiredGood(){
         desiredGood = null;
         itemDisplay.CleanDisplay();
         ClearExpireCoroutine();

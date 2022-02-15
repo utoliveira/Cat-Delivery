@@ -46,21 +46,31 @@ public class ItemMaker : MonoBehaviour, IItemDelivearable{
         return true;
     }
 
-    private IEnumerator ProduceItem(ItemRecipe recipe, ItemStorage storage){
+    public void ForceProduceRecipe(ItemRecipe recipe){
+        StartCoroutine(ProduceItem(recipe));
+    }
+
+    private IEnumerator ProduceItem(ItemRecipe recipe, ItemStorage storage = null){
         StartItemProduction(recipe, storage);
         yield return new WaitForSeconds(recipe.timeToProduce);
         FinishItemProduction();
     }
 
-    private void StartItemProduction(ItemRecipe recipe, ItemStorage storage){
-        OnStartProduction(recipe);
-        storage.RemoveItems(recipe.items);
+    private void StartItemProduction(ItemRecipe recipe, ItemStorage storage = null){
+
+        if(storage != null){
+            storage.RemoveItems(recipe.items);
+        } 
+
         AudioManager.instance.Play(AudioCode.ITEM_COLLECTING);
         displayer.Configure(recipe);
         this.currentRecipe = recipe;
         if(onProduceStart != null) 
             onProduceStart.Invoke();
+        
+        OnStartProduction(recipe);
     }
+    
     protected virtual void OnStartProduction(ItemRecipe recipe){}
 
     private void FinishItemProduction(){

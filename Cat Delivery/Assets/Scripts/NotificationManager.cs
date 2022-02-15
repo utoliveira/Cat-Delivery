@@ -5,13 +5,15 @@ using UnityEngine.Events;
 
 public class NotificationManager : MonoBehaviour
 {
-    TextNotification notificationComponent;
+    [SerializeField] TextNotification notificationComponent;
     [SerializeField] GameObject componentPrefab;
     Queue<string> notificationInfo;
+    [SerializeField] UnityEvent onFinishNotificating;
+    
     bool isNotificating;
 
     private void Update() {
-        if(Input.GetButtonDown(PlayerConstants.INTERACTION_AXIS)){
+        if(isNotificating && Input.GetButtonDown(PlayerConstants.INTERACTION_AXIS)){
             Next();
         };
     }
@@ -22,13 +24,16 @@ public class NotificationManager : MonoBehaviour
             Debug.Log("Notification Manager without prefab");
             return;
         };
+
+        if(notificationComponent == null){
+            notificationComponent = Instantiate(componentPrefab, this.transform)
+                .GetComponent<TextNotification>();
+        }
         
         this.notificationInfo = new Queue<string>(config.infos);
-        notificationComponent = Instantiate(componentPrefab, this.transform)
-            .GetComponent<TextNotification>();
-            
+        isNotificating = true;
         Next();
-        OnStartNotificating();
+        
     }
 
 
@@ -40,19 +45,10 @@ public class NotificationManager : MonoBehaviour
             return;
         }
 
-        OnFinishNotification();
-    }
-
-    private void OnFinishNotification() {
         notificationComponent.Disappear(true);
-        LevelManager.instance.StartManager();
         isNotificating = false;
+        if(onFinishNotificating != null)
+            onFinishNotificating.Invoke();
     }
 
-    
-    private void OnStartNotificating() {
-        LevelManager.instance.StopManager();
-        isNotificating = true;
-        
-    }
 }

@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3b3c68aab683a641ad668c1a31b6344, type: 3}
-  m_Name: Roasted Salmon
+  m_Script: {fileID: 11500000, guid: d6fa2d92fc1b3f34da284357edf89c3b, type: 3}
+  m_Name: Stop Level
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 11400000, guid: 921324f1d4d8f6242aab1ba5fc57ff2a, type: 2}
-  result: {fileID: 11400000, guid: d8c49593cf1959c47858836e896bd159, type: 2}
-  timeToProduce: 4

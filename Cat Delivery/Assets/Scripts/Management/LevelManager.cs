@@ -5,11 +5,13 @@ public class LevelManager : MonoBehaviour
     public static LevelManager instance; 
     [SerializeField] private LevelConfig config;
     [SerializeField] UnityEvent OnLevelClearEvents;
+    [SerializeField] UnityEvent OnGameOver;
     private Difficulty currentDifficulty;
     private int whiskas;
     private int catCookies;
     [SerializeField] private Transform playerSpawn;
     public bool playOnAwake;
+    bool immortalState = false;
     private void Awake() {
         if(instance){
             Destroy(this);
@@ -19,25 +21,28 @@ public class LevelManager : MonoBehaviour
     }
 
     private void Start() {
+        
+        SetupConfig();
+
         if(playOnAwake){
             StartManager();
         }
     }
 
     public void StopManager(){
-        if(MerchantManager.instance) MerchantManager.instance.StopManagement();
-        if(CostumerManager.instance) CostumerManager.instance.StopManagement();
+        if(MerchantManager.instance) MerchantManager.instance.StopManagement(true);
+        if(CostumerManager.instance) CostumerManager.instance.StopManagement(true);
+        immortalState = true;
     }
 
     public void StartManager(){
         Time.timeScale = 1;
-        
+        immortalState = false;
         if(!config) {
             Debug.LogWarning("Level without config");
             return;
         }
 
-        SetupConfig();
         StartManagers();
     }
 
@@ -103,7 +108,7 @@ public class LevelManager : MonoBehaviour
     }
 
     public void OnPlayerDies(GameObject player){
-        if(currentDifficulty.playerCanDie){
+        if(currentDifficulty.playerCanDie || !immortalState){
             Destroy(player);
             GameOver();
             return;
@@ -116,6 +121,7 @@ public class LevelManager : MonoBehaviour
     public void GameOver(){
         Time.timeScale = 0;
         AudioManager.instance.Play(AudioCode.GAME_OVER);
+        OnGameOver.Invoke();
     }
 
     public int GetWhiskas(){

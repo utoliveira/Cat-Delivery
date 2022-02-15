@@ -441,7 +441,8 @@ PrefabInstance:
       propertyPath: m_Offset.x
       value: -0.055556297
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9145038574653697587, guid: 4db8d4270e973d0469d94942d0df4bdd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4db8d4270e973d0469d94942d0df4bdd, type: 3}
 --- !u!4 &1677120979468640368 stripped
 Transform:
@@ -540,6 +541,10 @@ PrefabInstance:
     - target: {fileID: 6141688872903426834, guid: dd21596cc7275ce4791914398ec78bdd, type: 3}
       propertyPath: m_Name
       value: Vendor
+      objectReference: {fileID: 0}
+    - target: {fileID: 6141688872903426834, guid: dd21596cc7275ce4791914398ec78bdd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6141688872903426835, guid: dd21596cc7275ce4791914398ec78bdd, type: 3}
       propertyPath: m_RootOrder

@@ -124,5 +124,11 @@ public class Player : MonoBehaviour{
 
     public void SetEnableInput(bool enable){
         inputEnable = enable;
+
+        if(!inputEnable) {
+            horizontalMove = 0;
+            animator.SetFloat(PlayerConstants.ANIM_SPEED_PARAM, 0);
+
+        }
     }
 }

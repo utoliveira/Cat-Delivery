@@ -19,4 +19,4 @@ MonoBehaviour:
   desireTime: 8
   mainColor: {r: 0.32983267, g: 0.6415094, b: 0.5349033, a: 1}
   basePrice: 5
-  speed: 2
+  speed: 3

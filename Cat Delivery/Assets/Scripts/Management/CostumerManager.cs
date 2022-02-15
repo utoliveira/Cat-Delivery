@@ -17,9 +17,12 @@ public class CostumerManager : MonoBehaviour
         Destroy(this);
     }
     
-    public void StopManagement() {
+    public void StopManagement(bool removeDesiredGood = false) {
         if(currentManagement != null)
             StopCoroutine(currentManagement);
+
+        if(removeDesiredGood)
+            costumers.ForEach(costumer => costumer.RemoveDesiredGood());
 
     }
     public void StartManagement() {

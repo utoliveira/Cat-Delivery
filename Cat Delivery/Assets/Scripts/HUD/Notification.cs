@@ -42,6 +42,7 @@ public class Notification : MonoBehaviour
     }
 
     private void OnDestroy() {
-        this.DOKill();
+        this.transform.DOKill();
+        this.canvasGroup.DOKill();
     }
 }
